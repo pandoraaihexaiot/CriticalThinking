@@ -1,0 +1,2813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FFF6E9">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>The Thinking Trap — Learn Critical Thinking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFF6E9;
+    --bg-card: #FFFBF2;
+    --ink: #1F1B16;
+    --ink-soft: #5C5247;
+    --accent: #E85D3C;
+    --accent-soft: #FFE0D6;
+    --gold: #F5B82E;
+    --green: #2E8B57;
+    --green-soft: #DDF0E2;
+    --silver: #8A9BA8;
+    --silver-soft: #E4ECF1;
+    --red: #C0392B;
+    --red-soft: #F8DDD8;
+    --purple: #6B4E9B;
+    --purple-soft: #E8E0F5;
+    --border: #1F1B16;
+    --shadow: 6px 6px 0 var(--ink);
+    --shadow-sm: 3px 3px 0 var(--ink);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 40px 20px;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(232,93,60,0.06) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(245,184,46,0.08) 0%, transparent 40%);
+  }
+
+  .wrap {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  /* ---------- HOME SCREEN ---------- */
+  .home {
+    background: var(--bg-card);
+    border: 3px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 50px 45px;
+    position: relative;
+  }
+  .home::before {
+    content: "";
+    position: absolute;
+    top: -3px; left: -3px; right: -3px;
+    height: 14px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--accent) 0 18px,
+      var(--gold) 18px 36px,
+      var(--ink) 36px 54px
+    );
+  }
+
+  .eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: clamp(40px, 7vw, 64px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .subtitle {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+  }
+  .home p.intro-p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+    max-width: 580px;
+  }
+
+  .progress-summary {
+    margin: 36px 0 28px;
+    padding: 20px 24px;
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .progress-summary .label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+  .progress-summary .count {
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--accent);
+  }
+  .progress-summary .bar-wrap {
+    flex: 1;
+    min-width: 200px;
+    height: 16px;
+    background: var(--silver-soft);
+    border: 2px solid var(--ink);
+    overflow: hidden;
+    position: relative;
+  }
+  .progress-summary .bar-fill {
+    height: 100%;
+    background: var(--accent);
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent 0 8px,
+      rgba(255,255,255,0.15) 8px 16px
+    );
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .chapter-list {
+    margin-top: 28px;
+  }
+  .chapter-list h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+  .chapter-card {
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.15s ease, background 0.15s ease;
+    position: relative;
+  }
+  .chapter-card:hover:not(.locked) {
+    transform: translateX(4px);
+    background: var(--accent-soft);
+  }
+  .chapter-card.locked {
+    cursor: not-allowed;
+    opacity: 0.55;
+    background: var(--silver-soft);
+  }
+  .chapter-card.complete {
+    background: var(--green-soft);
+    border-color: var(--green);
+  }
+  .chapter-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: 32px;
+    color: var(--accent);
+    min-width: 50px;
+    line-height: 1;
+  }
+  .chapter-card.complete .chapter-num { color: var(--green); }
+  .chapter-info { flex: 1; }
+  .chapter-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .chapter-meta {
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .chapter-status {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+  }
+  .status-locked { color: var(--silver); }
+  .status-available { color: var(--accent); }
+  .status-complete { color: var(--green); }
+
+  .quiz-card {
+    background: var(--ink);
+    color: var(--bg-card);
+    border: 2px solid var(--ink);
+    padding: 24px 28px;
+    margin-top: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.15s ease;
+  }
+  .quiz-card:hover:not(.locked) {
+    transform: translateX(4px);
+  }
+  .quiz-card.locked {
+    cursor: not-allowed;
+    background: var(--silver-soft);
+    color: var(--ink-soft);
+    border-color: var(--silver);
+  }
+  .quiz-card .chapter-num { color: var(--gold); }
+  .quiz-card.locked .chapter-num { color: var(--silver); }
+  .quiz-card .chapter-title { color: inherit; }
+  .quiz-card .chapter-meta { color: inherit; opacity: 0.8; }
+
+  /* ---------- BUTTONS ---------- */
+  .btn {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--bg);
+    border: 3px solid var(--ink);
+    padding: 14px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+  .btn:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--ink);
+  }
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .btn:disabled:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
+  .btn-accent {
+    background: var(--accent);
+    color: var(--bg-card);
+  }
+  .btn-ghost {
+    background: var(--bg-card);
+    color: var(--ink);
+  }
+
+  /* ---------- CHAPTER VIEW ---------- */
+  .chapter-header {
+    background: var(--bg-card);
+    border: 3px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 36px 40px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .chapter-header::before {
+    content: "";
+    position: absolute;
+    top: -3px; left: -3px;
+    width: 80px;
+    height: 8px;
+    background: var(--accent);
+  }
+  .ch-back {
+    background: none;
+    border: none;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .ch-back:hover { color: var(--accent); }
+  .ch-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+  .ch-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .ch-title em { color: var(--accent); font-style: italic; font-weight: 600; }
+  .ch-meta {
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .chapter-body {
+    background: var(--bg-card);
+    border: 3px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 40px;
+    margin-bottom: 24px;
+  }
+
+  .chapter-body p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .chapter-body p.lead {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 400;
+    margin-bottom: 28px;
+    color: var(--ink);
+  }
+  .chapter-body h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 600;
+    margin-top: 36px;
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .chapter-body h3:first-child { margin-top: 0; }
+  .chapter-body strong { font-weight: 700; }
+  .chapter-body em { font-style: italic; }
+
+  .callout {
+    background: var(--accent-soft);
+    border-left: 5px solid var(--accent);
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .callout-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .callout p { margin-bottom: 0; font-size: 15px; }
+
+  .real-world {
+    background: var(--purple-soft);
+    border: 2px dashed var(--purple);
+    padding: 22px 26px;
+    margin: 28px 0;
+  }
+  .real-world-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    color: var(--purple);
+    margin-bottom: 10px;
+  }
+  .real-world h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .real-world p { margin-bottom: 0; font-size: 15px; line-height: 1.6; }
+
+  .try-this {
+    background: var(--green-soft);
+    border: 2px solid var(--green);
+    padding: 22px 26px;
+    margin: 28px 0;
+  }
+  .try-this-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+  .try-this h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .try-this p { margin-bottom: 0; font-size: 15px; line-height: 1.6; }
+
+  .demo-box {
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    padding: 24px;
+    margin: 28px 0;
+  }
+  .demo-question {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .demo-input {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .demo-input input {
+    border: 2px solid var(--ink);
+    padding: 10px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    background: var(--bg-card);
+    width: 120px;
+  }
+  .demo-input input:focus { outline: none; border-color: var(--accent); }
+  .demo-result {
+    margin-top: 14px;
+    padding: 14px 18px;
+    background: var(--bg-card);
+    border-left: 4px solid var(--accent);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .demo-result.correct { border-left-color: var(--green); background: var(--green-soft); }
+  .demo-result.wrong { border-left-color: var(--red); background: var(--red-soft); }
+
+  /* ---------- MINI CHECK ---------- */
+  .mini-check {
+    background: var(--bg-card);
+    border: 3px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 36px;
+    margin-bottom: 24px;
+  }
+  .mini-check-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .mini-check h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+  .mini-check .subhead {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+  }
+  .mc-question {
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 2px dashed var(--ink);
+  }
+  .mc-question:last-of-type { border-bottom: none; padding-bottom: 0; margin-bottom: 16px; }
+  .mc-q-text {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .mc-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .mc-option {
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    padding: 14px 18px;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+    transition: transform 0.12s ease, background 0.12s ease;
+  }
+  .mc-option:hover:not(:disabled) {
+    background: var(--accent-soft);
+    transform: translateX(3px);
+  }
+  .mc-option:disabled { cursor: default; }
+  .mc-option.correct { background: var(--green-soft); border-color: var(--green); }
+  .mc-option.wrong { background: var(--red-soft); border-color: var(--red); }
+  .mc-feedback {
+    margin-top: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    background: var(--silver-soft);
+    border-left: 4px solid var(--ink);
+    animation: slideIn 0.3s ease;
+  }
+  .mc-feedback.correct { background: var(--green-soft); border-left-color: var(--green); }
+  .mc-feedback.wrong { background: var(--red-soft); border-left-color: var(--red); }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .complete-section {
+    text-align: center;
+    padding: 30px 0 10px;
+  }
+  .complete-section .next-msg {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+
+  /* ---------- QUIZ (existing) ---------- */
+  .progress-bar {
+    background: var(--bg-card);
+    border: 3px solid var(--border);
+    height: 24px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent 0 8px,
+      rgba(255,255,255,0.15) 8px 16px
+    );
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    z-index: 1;
+    color: var(--bg);
+    mix-blend-mode: difference;
+  }
+  .question-card {
+    background: var(--bg-card);
+    border: 3px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 40px;
+    margin-bottom: 24px;
+  }
+  .q-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+  .scenario {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    line-height: 1.4;
+    margin-bottom: 28px;
+  }
+  .scenario strong { font-weight: 600; }
+  .options { display: flex; flex-direction: column; gap: 12px; }
+  .option {
+    background: var(--bg);
+    border: 2px solid var(--border);
+    padding: 18px 22px;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: transform 0.12s ease, background 0.12s ease;
+  }
+  .option:hover:not(:disabled) { background: var(--accent-soft); transform: translateX(4px); }
+  .option:disabled { cursor: default; }
+  .option-letter {
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: 18px;
+    background: var(--ink);
+    color: var(--bg);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 2px;
+  }
+  .option.selected { background: var(--accent-soft); border-color: var(--accent); }
+  .option.scored-2 { background: var(--green-soft); border-color: var(--green); }
+  .option.scored-1 { background: #FFF1D9; border-color: var(--gold); }
+  .option.scored-0 { background: var(--red-soft); border-color: var(--red); }
+  .option.scored-2 .option-letter { background: var(--green); }
+  .option.scored-1 .option-letter { background: var(--gold); color: var(--ink); }
+  .option.scored-0 .option-letter { background: var(--red); }
+  .option .option-text { flex: 1; }
+  .score-tag {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 6px;
+    display: inline-block;
+  }
+  .scored-2 .score-tag { color: var(--green); }
+  .scored-1 .score-tag { color: #B8860B; }
+  .scored-0 .score-tag { color: var(--red); }
+
+  .confidence-block {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 2px dashed var(--ink);
+  }
+  .confidence-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+  .confidence-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+  .conf-btn {
+    background: var(--bg);
+    border: 2px solid var(--border);
+    padding: 10px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    transition: all 0.12s ease;
+  }
+  .conf-btn:hover { background: var(--accent-soft); }
+  .conf-btn.selected { background: var(--ink); color: var(--bg); }
+
+  .reveal {
+    margin-top: 28px;
+    padding: 28px;
+    background: var(--silver-soft);
+    border: 2px solid var(--ink);
+    animation: slideIn 0.4s ease;
+  }
+  .bias-badge {
+    display: inline-block;
+    background: var(--purple);
+    color: var(--bg);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    margin-bottom: 16px;
+  }
+  .reveal h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .reveal p { font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
+  .reveal p:last-child { margin-bottom: 0; }
+  .reveal .reasoning-item {
+    margin-top: 16px;
+    padding-left: 16px;
+    border-left: 3px solid var(--ink);
+  }
+  .reveal .reasoning-item strong { font-family: 'Fraunces', serif; }
+  .next-btn-wrap { display: flex; justify-content: flex-end; margin-top: 24px; }
+
+  .results {
+    background: var(--bg-card);
+    border: 3px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 50px 45px;
+    text-align: center;
+    position: relative;
+  }
+  .results::before {
+    content: "";
+    position: absolute;
+    top: -3px; left: -3px; right: -3px;
+    height: 14px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--green) 0 18px,
+      var(--gold) 18px 36px,
+      var(--accent) 36px 54px
+    );
+  }
+  .score-display {
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: 96px;
+    line-height: 1;
+    color: var(--accent);
+    margin: 24px 0 8px;
+  }
+  .score-display .total {
+    font-size: 40px;
+    color: var(--ink-soft);
+    font-weight: 400;
+  }
+  .tier-name {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+  .tier-desc {
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto 32px;
+  }
+  .button-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .review-card {
+    background: var(--bg-card);
+    border: 3px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 30px;
+    margin-bottom: 20px;
+  }
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .review-q-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .review-score {
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: 24px;
+  }
+  .review-score.s2 { color: var(--green); }
+  .review-score.s1 { color: #B8860B; }
+  .review-score.s0 { color: var(--red); }
+  .review-scenario {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .review-meta { font-size: 14px; color: var(--ink-soft); margin-bottom: 4px; }
+  .review-meta strong { color: var(--ink); }
+
+  .hidden { display: none; }
+
+  /* ---------- THANK YOU SCREEN ---------- */
+  .results.thank-you { background: var(--bg-card); }
+  .results.thank-you::before {
+    background: repeating-linear-gradient(
+      90deg,
+      var(--green) 0 18px,
+      var(--gold) 18px 36px,
+      var(--green) 36px 54px
+    );
+  }
+  .thank-you-icon {
+    font-family: 'Fraunces', serif;
+    font-size: 80px;
+    color: var(--green);
+    line-height: 1;
+    margin: 16px 0 8px;
+  }
+
+  /* ---------- TOOLKIT CARD (HOME) ---------- */
+  .toolkit-card {
+    background: var(--green-soft);
+    color: var(--ink);
+    border: 2px solid var(--green);
+    padding: 24px 28px;
+    margin-top: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.15s ease;
+  }
+  .toolkit-card:hover:not(.locked) { transform: translateX(4px); }
+  .toolkit-card.locked {
+    cursor: not-allowed;
+    background: var(--silver-soft);
+    color: var(--ink-soft);
+    border-color: var(--silver);
+  }
+  .toolkit-card .chapter-num {
+    font-size: 28px;
+    color: var(--green);
+  }
+  .toolkit-card.locked .chapter-num { color: var(--silver); }
+
+  /* ---------- TOOLKIT SCREEN ---------- */
+  .toolkit-header::before { background: var(--green) !important; }
+  .toolkit-intro {
+    background: var(--bg-card);
+    border: 3px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 30px 36px;
+    margin-bottom: 24px;
+  }
+  .toolkit-intro p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+  .toolkit-intro p:last-child { margin-bottom: 0; }
+  .toolkit-intro strong { color: var(--ink); }
+
+  .toolkit-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .toolkit-tab {
+    flex: 1;
+    min-width: 220px;
+    background: var(--bg-card);
+    border: 3px solid var(--ink);
+    box-shadow: var(--shadow-sm);
+    padding: 16px 20px;
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    color: var(--ink);
+  }
+  .toolkit-tab:hover { background: var(--green-soft); }
+  .toolkit-tab.active {
+    background: var(--ink);
+    color: var(--bg-card);
+  }
+
+  /* ---------- FORM FIELDS ---------- */
+  .form-field {
+    margin-bottom: 24px;
+  }
+  .form-label {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .premortem-sublabel {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+  .form-field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    border: 2px solid var(--ink);
+    background: var(--bg);
+    resize: vertical;
+    line-height: 1.5;
+  }
+  .form-field textarea:focus { outline: none; border-color: var(--accent); background: var(--bg-card); }
+
+  .radio-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .radio-option, .checkbox-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg);
+    border: 2px solid var(--ink);
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.12s ease;
+  }
+  .radio-option:hover, .checkbox-option:hover { background: var(--accent-soft); }
+  .radio-option input, .checkbox-option input {
+    margin: 0;
+    cursor: pointer;
+    accent-color: var(--accent);
+  }
+  .radio-option:has(input:checked),
+  .checkbox-option:has(input:checked) {
+    background: var(--accent);
+    color: var(--bg-card);
+    border-color: var(--accent);
+  }
+
+  .checkbox-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .checkbox-col .checkbox-option {
+    justify-content: flex-start;
+  }
+
+  .toolkit-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px dashed var(--ink);
+    flex-wrap: wrap;
+  }
+  .copy-status {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  /* ---------- QUIZ BACK BUTTON ---------- */
+  .quiz-back-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .quiz-back-btn {
+    background: none;
+    border: 2px solid var(--ink);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 8px 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: all 0.12s ease;
+  }
+  .quiz-back-btn:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .quiz-resume-msg {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- NAME/DATE ON RESULTS ---------- */
+  .name-section {
+    margin: 28px auto;
+    max-width: 460px;
+    padding: 24px;
+    background: var(--bg);
+    border: 2px dashed var(--ink);
+  }
+  .name-section .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  .name-section input {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    border: 2px solid var(--ink);
+    background: var(--bg-card);
+    margin-bottom: 14px;
+    text-align: center;
+  }
+  .name-section input:focus { outline: none; border-color: var(--accent); }
+  .name-section .name-display {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .name-section .date-display {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .screenshot-hint {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 8px;
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 16px 10px; }
+    .home, .results, .chapter-header, .chapter-body, .mini-check, .toolkit-intro { padding: 24px 18px; }
+    .question-card { padding: 24px 16px; }
+    .score-display { font-size: 64px; }
+    .score-display .total { font-size: 28px; }
+    .tier-name { font-size: 22px; }
+    .subtitle { font-size: 18px; }
+    h1 { font-size: 40px; }
+    .ch-title { font-size: 28px; }
+
+    /* Stats row on intro */
+    .stats-row { gap: 18px; }
+    .stat-num { font-size: 28px; }
+
+    /* Chapter / quiz cards */
+    .chapter-card, .quiz-card, .toolkit-card {
+      padding: 16px 18px;
+      gap: 14px;
+    }
+    .chapter-num { font-size: 26px; min-width: 38px; }
+    .chapter-title { font-size: 16px; }
+    .chapter-meta { font-size: 12px; }
+    .chapter-status { font-size: 10px; }
+
+    /* Progress summary */
+    .progress-summary { padding: 16px 18px; gap: 10px; }
+    .progress-summary .count { font-size: 20px; }
+
+    /* Quiz options - bigger tap targets */
+    .option {
+      padding: 16px 16px;
+      font-size: 14px;
+      gap: 12px;
+    }
+    .option-letter {
+      width: 28px;
+      height: 28px;
+      font-size: 15px;
+    }
+    .scenario { font-size: 18px; }
+
+    /* Confidence buttons stack on mobile */
+    .confidence-buttons { gap: 8px; }
+    .conf-btn {
+      flex: 1;
+      min-width: 90px;
+      padding: 12px 12px;
+      font-size: 12px;
+    }
+
+    /* Reveal block */
+    .reveal { padding: 22px 18px; }
+    .reveal h3 { font-size: 18px; }
+    .reveal p { font-size: 14px; }
+    .reveal .reasoning-item { padding-left: 12px; }
+
+    /* Mini check options */
+    .mc-option { padding: 14px 16px; font-size: 14px; }
+    .mc-q-text { font-size: 16px; }
+
+    /* Buttons - bigger for touch */
+    .btn {
+      padding: 14px 24px;
+      font-size: 13px;
+    }
+    .button-row { flex-direction: column; gap: 10px; }
+    .button-row .btn { width: 100%; }
+
+    /* Quiz back bar */
+    .quiz-back-bar { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .quiz-resume-msg { font-size: 12px; }
+
+    /* Name input */
+    .name-section { padding: 20px 16px; margin: 20px auto; }
+    .name-section input { font-size: 16px; padding: 10px 12px; }
+
+    /* Results thank you */
+    .thank-you-icon { font-size: 60px; }
+
+    /* Review cards */
+    .review-card { padding: 22px 18px; }
+    .review-header { gap: 10px; }
+    .review-q-num { font-size: 13px; }
+    .review-score { font-size: 20px; }
+    .review-scenario { font-size: 15px; }
+    .review-meta { font-size: 13px; }
+
+    /* Toolkit */
+    .toolkit-tabs { gap: 8px; }
+    .toolkit-tab {
+      min-width: 0;
+      padding: 14px 14px;
+      font-size: 15px;
+    }
+    .chapter-body { padding: 24px 18px; }
+    .form-label { font-size: 15px; }
+    .form-field textarea {
+      font-size: 16px; /* prevents iOS zoom */
+      padding: 10px 12px;
+    }
+    .radio-option, .checkbox-option {
+      font-size: 13px;
+      padding: 10px 12px;
+      width: 100%;
+      justify-content: flex-start;
+    }
+    .radio-row { flex-direction: column; gap: 8px; }
+    .toolkit-actions { flex-direction: column; align-items: stretch; }
+    .toolkit-actions .btn { width: 100%; }
+    .copy-status { text-align: center; }
+
+    /* Demo boxes */
+    .demo-box { padding: 18px 16px; }
+    .demo-question { font-size: 16px; }
+    .demo-input { flex-direction: column; align-items: stretch; }
+    .demo-input input { width: 100%; font-size: 16px; }
+    .demo-input .btn { width: 100%; }
+
+    /* Callouts */
+    .callout, .real-world, .try-this { padding: 18px 20px; }
+    .real-world h4, .try-this h4 { font-size: 16px; }
+    .chapter-body p.lead { font-size: 18px; }
+    .chapter-body h3 { font-size: 22px; }
+
+    /* Complete section button */
+    .complete-section .btn { width: 100%; }
+    #next-chapter-btn { width: 100%; }
+  }
+
+  @media (max-width: 380px) {
+    h1 { font-size: 34px; }
+    .score-display { font-size: 54px; }
+    .stats-row { gap: 12px; }
+    .stat-num { font-size: 24px; }
+    .stat-label { font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ========== HOME SCREEN ========== -->
+  <section id="home-screen" class="home">
+    <div class="eyebrow">Learn · Practice · Test</div>
+    <h1>The <em>Thinking</em><br>Trap</h1>
+    <div class="subtitle">a critical thinking course in 5 chapters</div>
+    <p class="intro-p">Your brain runs on shortcuts. Most of the time they help you survive the day without overthinking what to have for breakfast. Sometimes they make you cancel a beach trip after one shark story, finish a movie you hate, or trust a stranger's hot crypto tip with your savings.</p>
+    <p class="intro-p">This isn't a lecture. Read 5 short chapters, try the exercises, then test yourself with 10 real-world scenarios at the end. Total time: about 45 minutes.</p>
+
+    <div class="progress-summary">
+      <div>
+        <div class="label">Your Progress</div>
+        <div class="count"><span id="completed-count">0</span> / 5 chapters</div>
+      </div>
+      <div class="bar-wrap"><div id="overall-bar" class="bar-fill" style="width: 0%"></div></div>
+    </div>
+
+    <div class="chapter-list">
+      <h2>Course Outline</h2>
+      <div id="chapter-list-container"></div>
+
+      <div id="quiz-card" class="quiz-card locked" onclick="tryStartQuiz()">
+        <div class="chapter-num">★</div>
+        <div class="chapter-info">
+          <div class="chapter-title">Final Quiz: 10 Scenarios</div>
+          <div class="chapter-meta">~15 min · Unlocks when all chapters are complete</div>
+        </div>
+        <div id="quiz-status" class="chapter-status status-locked">🔒 Locked</div>
+      </div>
+
+      <div id="toolkit-card" class="toolkit-card locked" onclick="tryOpenToolkit()">
+        <div class="chapter-num">🛠</div>
+        <div class="chapter-info">
+          <div class="chapter-title">Your Toolkit</div>
+          <div class="chapter-meta">Decision Journal + Pre-mortem Worksheet · Use before real decisions</div>
+        </div>
+        <div id="toolkit-status" class="chapter-status status-locked">🔒 Locked</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CHAPTER VIEW ========== -->
+  <section id="chapter-screen" class="hidden">
+    <div class="chapter-header">
+      <button class="ch-back" onclick="goHome()">← Back to course</button>
+      <div class="ch-num" id="ch-num"></div>
+      <div class="ch-title" id="ch-title"></div>
+      <div class="ch-meta" id="ch-meta"></div>
+    </div>
+    <div class="chapter-body" id="chapter-body"></div>
+    <div class="mini-check" id="mini-check-block"></div>
+    <div class="complete-section hidden" id="complete-section">
+      <div class="next-msg" id="next-msg"></div>
+      <button class="btn btn-accent" id="next-chapter-btn" onclick="nextChapter()">Continue →</button>
+    </div>
+  </section>
+
+  <!-- ========== QUIZ SCREENS ========== -->
+  <section id="quiz-screen" class="hidden">
+    <div class="quiz-back-bar">
+      <button class="quiz-back-btn" onclick="exitQuizToHome()">← Save & Exit to Course</button>
+      <div class="quiz-resume-msg">Your progress is saved if you leave</div>
+    </div>
+    <div class="progress-bar">
+      <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+      <div id="progress-text" class="progress-text">Question 1 of 10</div>
+    </div>
+    <div id="question-container"></div>
+  </section>
+
+  <section id="results-screen" class="hidden">
+    <div class="results" id="results-main">
+      <div class="eyebrow">Your Result</div>
+      <div class="score-display"><span id="final-score">0</span><span class="total">/20</span></div>
+      <div id="tier-name" class="tier-name"></div>
+      <div id="tier-desc" class="tier-desc"></div>
+
+      <div class="name-section">
+        <div class="label">Submission Details</div>
+        <div id="name-input-wrap">
+          <input type="text" id="name-input" placeholder="Type your name here" maxlength="60" oninput="updateNameDisplay()">
+          <div class="date-display" id="completion-date"></div>
+          <div class="screenshot-hint">Type your name above, screenshot this page, then click Submit Results</div>
+        </div>
+      </div>
+
+      <div class="button-row">
+        <button class="btn btn-accent" id="submit-results-btn" onclick="submitResults()" disabled>Submit Results</button>
+        <button class="btn btn-ghost" onclick="showReview()">Review Answers</button>
+        <button class="btn btn-ghost" onclick="goHome()">Back to Course</button>
+      </div>
+    </div>
+
+    <div class="results thank-you hidden" id="results-thankyou">
+      <div class="eyebrow" style="color: var(--green);">Submission Complete</div>
+      <div class="thank-you-icon">✓</div>
+      <h1 style="font-size: 48px; margin-bottom: 8px;">Thank you, <em id="ty-name">friend</em></h1>
+      <div class="subtitle" style="margin-bottom: 24px;">your results have been submitted</div>
+      <p class="intro-p" style="text-align: center; max-width: 500px; margin: 0 auto 14px;">The Google Form has opened in a new tab. Review the pre-filled details and click <strong>Submit</strong> on that page to finalize.</p>
+      <p class="intro-p" style="text-align: center; max-width: 500px; margin: 0 auto 32px;">You're done — but the real work starts now. The tools in <strong>Your Toolkit</strong> are how this course actually changes how you think.</p>
+      <div class="button-row">
+        <button class="btn btn-accent" onclick="goToToolkit()">Open Your Toolkit →</button>
+        <button class="btn btn-ghost" onclick="goHome()">Back to Course</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="review-screen" class="hidden">
+    <div class="home" style="padding: 30px; margin-bottom: 24px; text-align: left;">
+      <div class="eyebrow">Review Mode</div>
+      <h1 style="font-size: 40px; margin-bottom: 8px;">Your <em>Answers</em></h1>
+      <p class="intro-p" style="margin: 0;">Every question, your choice, and the reasoning behind each option.</p>
+    </div>
+    <div id="review-container"></div>
+    <div class="button-row" style="margin-top: 24px;">
+      <button class="btn btn-accent" onclick="restartQuiz()">Take Quiz Again</button>
+      <button class="btn btn-ghost" onclick="backToResults()">Back to Score</button>
+    </div>
+  </section>
+
+  <!-- ========== TOOLKIT SCREEN ========== -->
+  <section id="toolkit-screen" class="hidden">
+    <div class="chapter-header toolkit-header">
+      <button class="ch-back" onclick="goHome()">← Back to course</button>
+      <div class="ch-num" style="color: var(--green);">Your Toolkit</div>
+      <div class="ch-title">Tools for <em>Everyday</em><br>Thinking</div>
+      <div class="ch-meta">Use these before any important decision</div>
+    </div>
+
+    <div class="toolkit-intro">
+      <p>Knowing the biases isn't enough. These two tools are how you actually apply what you've learned. Use them before any decision that matters — at work, at home, with money, with relationships.</p>
+      <p><strong>Important:</strong> This tool doesn't save your entries permanently. When you finish, copy your work to clipboard and paste it into your own notes app, Notion, Google Doc, or email. Treat this as a worksheet, not storage.</p>
+    </div>
+
+    <div class="toolkit-tabs">
+      <button class="toolkit-tab active" data-tab="journal" onclick="switchToolkitTab('journal')">
+        📓 Decision Journal
+      </button>
+      <button class="toolkit-tab" data-tab="premortem" onclick="switchToolkitTab('premortem')">
+        🔮 Pre-mortem Worksheet
+      </button>
+    </div>
+
+    <!-- DECISION JOURNAL -->
+    <div class="toolkit-panel" id="panel-journal">
+      <div class="chapter-body">
+        <h3>Decision Journal</h3>
+        <p>Before any decision that matters, take 5 minutes to fill this in. <strong>Review it in 3 months</strong>. You'll discover how often you were overconfident — and that discovery is what actually makes you a better thinker.</p>
+
+        <div class="form-field">
+          <label class="form-label">1. What are you deciding?</label>
+          <textarea id="dj-decision" rows="2" placeholder="e.g., Should I accept the job offer from Company X?"></textarea>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">2. What's your context right now? (mood, pressure, sleep, stress)</label>
+          <textarea id="dj-context" rows="2" placeholder="e.g., Tired, feeling pressured by the deadline, finances are tight..."></textarea>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">3. What are you predicting will happen?</label>
+          <textarea id="dj-prediction" rows="3" placeholder="e.g., I'll enjoy the new role for the first 6 months, then get bored. Salary will be better by ~20%..."></textarea>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">4. How confident are you in this prediction?</label>
+          <div class="radio-row">
+            <label class="radio-option"><input type="radio" name="dj-conf" value="Low (&lt;50%)"> Low (&lt;50%)</label>
+            <label class="radio-option"><input type="radio" name="dj-conf" value="Medium (50-75%)"> Medium (50-75%)</label>
+            <label class="radio-option"><input type="radio" name="dj-conf" value="High (75-90%)"> High (75-90%)</label>
+            <label class="radio-option"><input type="radio" name="dj-conf" value="Very High (&gt;90%)"> Very High (&gt;90%)</label>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">5. Your reasoning (why do you believe this?)</label>
+          <textarea id="dj-reasoning" rows="4" placeholder="e.g., Three people I trust said Company X treats engineers well. The tech stack is one I want to learn..."></textarea>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">6. What would change your mind?</label>
+          <textarea id="dj-counter" rows="3" placeholder="e.g., If I found out the team has high turnover, or the CEO is known for poor management..."></textarea>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">7. Which biases might be affecting this decision?</label>
+          <div class="checkbox-col">
+            <label class="checkbox-option"><input type="checkbox" name="dj-biases" value="Confirmation bias (seeking only evidence that supports what I want)"> Confirmation bias</label>
+            <label class="checkbox-option"><input type="checkbox" name="dj-biases" value="Sunk cost (already invested time/money into this path)"> Sunk cost</label>
+            <label class="checkbox-option"><input type="checkbox" name="dj-biases" value="Anchoring (one number is pulling my judgment)"> Anchoring</label>
+            <label class="checkbox-option"><input type="checkbox" name="dj-biases" value="Bandwagon (others are doing this)"> Bandwagon</label>
+            <label class="checkbox-option"><input type="checkbox" name="dj-biases" value="Availability (recent/vivid event is dominating my thinking)"> Availability heuristic</label>
+            <label class="checkbox-option"><input type="checkbox" name="dj-biases" value="Recency (overweighting recent events)"> Recency bias</label>
+          </div>
+        </div>
+
+        <div class="toolkit-actions">
+          <button class="btn btn-accent" onclick="copyJournal()">📋 Copy to Clipboard</button>
+          <button class="btn btn-ghost" onclick="resetJournal()">Clear Form</button>
+          <span id="journal-copied" class="copy-status hidden">✓ Copied — now paste into your notes</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRE-MORTEM WORKSHEET -->
+    <div class="toolkit-panel hidden" id="panel-premortem">
+      <div class="chapter-body">
+        <h3>Pre-mortem Worksheet</h3>
+        <p>Before you commit to a plan, imagine it's <strong>6 months from now</strong> and the decision has <strong>failed catastrophically</strong>. Your job is to explain why. This surfaces concerns you'd otherwise bury.</p>
+
+        <div class="form-field">
+          <label class="form-label">1. What decision or plan are you evaluating?</label>
+          <textarea id="pm-plan" rows="2" placeholder="e.g., Launching a new product line next quarter"></textarea>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">2. Close your eyes. It's 6 months later. The decision failed catastrophically. What happened?</label>
+          <div class="premortem-sublabel">Write 5 reasons why it failed. Be specific. No judgment — the more concrete the better.</div>
+          <textarea id="pm-reason1" rows="2" placeholder="Reason #1..."></textarea>
+          <textarea id="pm-reason2" rows="2" placeholder="Reason #2..." style="margin-top: 10px;"></textarea>
+          <textarea id="pm-reason3" rows="2" placeholder="Reason #3..." style="margin-top: 10px;"></textarea>
+          <textarea id="pm-reason4" rows="2" placeholder="Reason #4..." style="margin-top: 10px;"></textarea>
+          <textarea id="pm-reason5" rows="2" placeholder="Reason #5..." style="margin-top: 10px;"></textarea>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">3. Of those 5, which is most likely to actually happen?</label>
+          <textarea id="pm-likely" rows="2" placeholder="e.g., Reason #2 — we underestimated how long the integration would take..."></textarea>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">4. What would you do differently, starting today, to prevent that?</label>
+          <textarea id="pm-mitigation" rows="3" placeholder="e.g., Build in a 30% time buffer. Assign a dedicated integration lead. Set a checkpoint at week 4..."></textarea>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">5. What's the earliest warning sign that this failure mode is starting?</label>
+          <textarea id="pm-warning" rows="2" placeholder="e.g., If week 2 tasks slip more than 3 days, we're already on the failure path..."></textarea>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label">6. After this exercise — do you still want to proceed?</label>
+          <div class="radio-row">
+            <label class="radio-option"><input type="radio" name="pm-proceed" value="Yes, as planned"> Yes, as planned</label>
+            <label class="radio-option"><input type="radio" name="pm-proceed" value="Yes, but with the mitigations above"> Yes, with mitigations</label>
+            <label class="radio-option"><input type="radio" name="pm-proceed" value="No, revise the plan"> No, revise the plan</label>
+            <label class="radio-option"><input type="radio" name="pm-proceed" value="No, abandon"> No, abandon</label>
+          </div>
+        </div>
+
+        <div class="toolkit-actions">
+          <button class="btn btn-accent" onclick="copyPremortem()">📋 Copy to Clipboard</button>
+          <button class="btn btn-ghost" onclick="resetPremortem()">Clear Form</button>
+          <span id="premortem-copied" class="copy-status hidden">✓ Copied — now paste into your notes</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// ================== PERSISTENCE LAYER ==================
+const STORAGE_KEY = 'thinking_trap_v1';
+
+function saveState() {
+  try {
+    const state = {
+      completedChapters: completedChapters,
+      userAnswers: userAnswers,
+      chapterAnswers: chapterAnswers,
+      userName: document.getElementById('name-input')?.value || '',
+      journal: readJournalFields(),
+      premortem: readPremortemFields()
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    // localStorage unavailable (incognito, quota, etc.) — fail silently
+  }
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (e) {
+    return null;
+  }
+}
+
+function readJournalFields() {
+  const fields = {};
+  const textIds = ['dj-decision','dj-context','dj-prediction','dj-reasoning','dj-counter'];
+  textIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) fields[id] = el.value;
+  });
+  const conf = document.querySelector('input[name="dj-conf"]:checked');
+  fields['dj-conf'] = conf ? conf.value : '';
+  fields['dj-biases'] = Array.from(document.querySelectorAll('input[name="dj-biases"]:checked')).map(c => c.value);
+  return fields;
+}
+
+function readPremortemFields() {
+  const fields = {};
+  const textIds = ['pm-plan','pm-reason1','pm-reason2','pm-reason3','pm-reason4','pm-reason5','pm-likely','pm-mitigation','pm-warning'];
+  textIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) fields[id] = el.value;
+  });
+  const proc = document.querySelector('input[name="pm-proceed"]:checked');
+  fields['pm-proceed'] = proc ? proc.value : '';
+  return fields;
+}
+
+function restoreJournalFields(data) {
+  if (!data) return;
+  ['dj-decision','dj-context','dj-prediction','dj-reasoning','dj-counter'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && data[id] !== undefined) el.value = data[id];
+  });
+  if (data['dj-conf']) {
+    const radio = document.querySelector(`input[name="dj-conf"][value="${data['dj-conf']}"]`);
+    if (radio) radio.checked = true;
+  }
+  if (Array.isArray(data['dj-biases'])) {
+    data['dj-biases'].forEach(val => {
+      const cb = document.querySelector(`input[name="dj-biases"][value="${CSS.escape(val)}"]`);
+      if (cb) cb.checked = true;
+    });
+  }
+}
+
+function restorePremortemFields(data) {
+  if (!data) return;
+  ['pm-plan','pm-reason1','pm-reason2','pm-reason3','pm-reason4','pm-reason5','pm-likely','pm-mitigation','pm-warning'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && data[id] !== undefined) el.value = data[id];
+  });
+  if (data['pm-proceed']) {
+    const radio = document.querySelector(`input[name="pm-proceed"][value="${data['pm-proceed']}"]`);
+    if (radio) radio.checked = true;
+  }
+}
+
+// Debounced save for form fields (fires ~500ms after last change)
+let saveTimeout = null;
+function debouncedSave() {
+  clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(saveState, 500);
+}
+
+// ================== CHAPTER CONTENT ==================
+const CHAPTERS = [
+  {
+    title: "Why Your Brain <em>Lies</em> to You",
+    readTime: "5 min read",
+    body: `
+      <p class="lead">Before we talk about specific biases, here's the most important idea in this whole course: your brain isn't broken. It's working exactly as designed. The problem is that the design is older than civilization.</p>
+
+      <h3>Two systems, one brain</h3>
+      <p>Psychologist Daniel Kahneman won a Nobel Prize partly for popularizing a simple model: your mind runs on two systems.</p>
+      <p><strong>System 1</strong> is fast, automatic, and effortless. It tells you a face is angry, completes "bread and..." with "butter", and slams your foot on the brake before you consciously see the cat. It runs all day, every day, without asking permission.</p>
+      <p><strong>System 2</strong> is slow, deliberate, and exhausting. It's what you use to multiply 17 × 24, parallel park, or weigh a job offer. It's powerful — but it's lazy. It would much rather let System 1 handle things.</p>
+
+      <div class="callout">
+        <div class="callout-label">The core problem</div>
+        <p>Most "thinking errors" aren't errors at all. They're System 1 doing exactly what it evolved to do — pattern-match quickly — in situations where slow, careful System 2 reasoning was actually needed.</p>
+      </div>
+
+      <h3>A quick demonstration</h3>
+      <p>Read this carefully and answer with the first number that comes to mind:</p>
+
+      <div class="demo-box">
+        <div class="demo-question">A bat and a ball cost RM 1.10 in total. The bat costs RM 1.00 more than the ball. <strong>How much does the ball cost?</strong></div>
+        <div class="demo-input">
+          <input type="text" id="bat-ball-input" placeholder="RM ?" onkeypress="if(event.key==='Enter') checkBatBall()">
+          <button class="btn" onclick="checkBatBall()" style="padding: 10px 20px;">Check</button>
+        </div>
+        <div id="bat-ball-result" class="hidden"></div>
+      </div>
+
+      <h3>Why smart people fall harder</h3>
+      <p>Here's the uncomfortable part. Studies have shown that highly intelligent people are <em>often more confident</em> in their wrong answers — not less. Intelligence makes you a better defender of conclusions you've already reached. It doesn't automatically make you better at noticing when those conclusions are wrong in the first place.</p>
+      <p>Critical thinking isn't about being smart. It's about being willing to <em>slow down</em> when your gut is yelling at you to speed up.</p>
+
+      <div class="real-world">
+        <div class="real-world-label">Real World</div>
+        <h4>The 2008 Financial Crisis</h4>
+        <p>Some of the most credentialed economists, bankers, and rating agencies in the world confidently rated mortgage-backed securities as ultra-safe — right up until the housing market collapsed and triggered a global recession. Intelligence and credentials didn't protect them. The opposite, in fact: their expertise made them more confident, and that confidence made them stop questioning.</p>
+      </div>
+
+      <div class="try-this">
+        <div class="try-this-label">Try This At Home</div>
+        <h4>The 5-Second Pause</h4>
+        <p>For the next 24 hours, every time you have a strong gut reaction (anger at a news headline, certainty about a decision, instant judgment of a person), pause for 5 seconds and ask: <em>"Is this System 1 talking, or did I actually think about this?"</em> You'll be shocked how often it's the first one.</p>
+      </div>
+    `,
+    miniCheck: {
+      questions: [
+        {
+          question: "Which best describes why even very smart people fall for thinking traps?",
+          options: [
+            "They're not actually as smart as they appear or believe themselves to be in everyday situations.",
+            "Intelligence helps you defend conclusions, but doesn't make you slow down to question them first.",
+            "They simply haven't read enough books or attended enough seminars on critical thinking yet.",
+            "They tend to be too distracted by other things going on in their busy daily lives."
+          ],
+          correct: 1,
+          feedback: {
+            correct: "Exactly. Intelligence is a great lawyer for whatever conclusion you've already reached. Critical thinking is the willingness to question that conclusion in the first place.",
+            wrong: "The key insight is that intelligence often makes us <em>more confident</em>, not less. Smart people are excellent at justifying their conclusions — which makes them less likely to notice when they're wrong."
+          }
+        },
+        {
+          question: "What's the main difference between System 1 and System 2 thinking?",
+          options: [
+            "System 1 handles emotions automatically, while System 2 handles all the logical reasoning carefully.",
+            "System 1 operates consciously and visibly, while System 2 runs entirely in the unconscious mind.",
+            "System 1 is fast, automatic, effortless; System 2 is slow, deliberate, and effortful to use.",
+            "System 1 is mostly wrong while System 2 is mostly right when we make important choices."
+          ],
+          correct: 2,
+          feedback: {
+            correct: "Right. System 1 isn't bad — it gets you through 99% of life efficiently. The trick is knowing when to wake up System 2.",
+            wrong: "System 1 isn't 'wrong' or 'emotional' — it's just <em>fast</em>. It handles routine pattern-matching. System 2 is the slow, effortful thinking you use for harder problems."
+          }
+        }
+      ]
+    }
+  },
+
+  {
+    title: "The <em>Evidence</em> Trap",
+    readTime: "6 min read",
+    body: `
+      <p class="lead">Most arguments aren't really about facts. They're about which facts each side notices, remembers, and shares. This chapter is about how we mishandle evidence — usually without realizing it.</p>
+
+      <h3>Confirmation bias: your brain is a lawyer, not a scientist</h3>
+      <p>You don't approach the world like a scientist running experiments. You approach it like a lawyer building a case. Once you have an opinion, your brain quietly starts collecting evidence <em>for</em> it and dismissing evidence <em>against</em> it. You don't notice this happening — that's the whole problem.</p>
+      <p>Scroll through your social media feed. Every post that confirms your existing views feels like more proof you're right. Every post that challenges them feels like obvious nonsense from someone who "doesn't get it." But the algorithm is showing you what you already engage with — your sense of "being proven right" is manufactured.</p>
+
+      <div class="callout">
+        <div class="callout-label">The real test</div>
+        <p>Ask yourself: <em>"What evidence would change my mind on this?"</em> If you can't think of anything, you're not reasoning — you're rationalizing.</p>
+      </div>
+
+      <h3>Anecdotes are not data</h3>
+      <p>"My uncle smoked his whole life and lived to 87." "I knew someone who took that supplement and it cured them." "I heard about a guy who..."</p>
+      <p>Single stories are emotionally powerful. They feel like proof. They are not. One story, no matter how vivid, tells you almost nothing about how things usually go. The plural of anecdote is not data.</p>
+
+      <h3>Survivorship bias: the silent half of every story</h3>
+      <p>During WWII, the U.S. military studied bomber planes returning from missions to figure out where to add armor. They mapped the bullet holes — wings, tail, body — and were about to reinforce those areas. Then a statistician named Abraham Wald pointed out the problem: <em>those were the planes that came back</em>. The planes hit in other places weren't there to study. They needed to armor the spots with <strong>no</strong> bullet holes.</p>
+      <p>This pattern repeats everywhere. "Successful" entrepreneurs share their habits — but the thousands of failed entrepreneurs with the same habits aren't around to be interviewed. "Best-selling" investment strategies survived because they worked; the ones that lost everything are forgotten.</p>
+
+      <div class="real-world">
+        <div class="real-world-label">Real World</div>
+        <h4>"College dropouts make billions"</h4>
+        <p>You've heard the stories: Bill Gates, Mark Zuckerberg, Steve Jobs all dropped out of college and became billionaires. The implied lesson: drop out, win big. The hidden truth: millions of people dropped out and didn't become billionaires — we just don't hear about them. The dropouts who succeeded are the rare survivors of a brutal selection process, not proof that dropping out is a good strategy.</p>
+      </div>
+
+      <h3>The fix: actively look for the missing evidence</h3>
+      <p>When someone presents a strong claim, train yourself to ask:</p>
+      <p>• <strong>What's the counter-evidence?</strong> Has anyone seriously argued the opposite?</p>
+      <p>• <strong>Who's missing from this picture?</strong> The failures, the dropouts, the people who didn't survive to tell the story?</p>
+      <p>• <strong>What would I expect to see if this were wrong?</strong> If you can't picture it, you haven't really tested the claim.</p>
+
+      <div class="try-this">
+        <div class="try-this-label">Try This At Home</div>
+        <h4>The Steel-Man Exercise</h4>
+        <p>Pick a belief you hold strongly — political, dietary, professional, anything. Now spend 5 minutes writing the <em>strongest possible</em> argument for the opposite view. Not the dumbest version of it — the smartest. If you can't, you don't actually understand your own position well enough to defend it.</p>
+      </div>
+    `,
+    miniCheck: {
+      questions: [
+        {
+          question: "Your friend says: 'I always drink ginger tea when I'm sick and it cures my cold within 3 days.' What's the missing piece?",
+          options: [
+            "Ginger tea probably doesn't really work for treating common colds in any meaningful way.",
+            "Three days is far too short a time to draw any reliable conclusions about a cold remedy.",
+            "She would do better to also try several other home remedies just to be more sure of results.",
+            "Without the same cold untreated as a comparison, there's no way to know if the tea did anything."
+          ],
+          correct: 3,
+          feedback: {
+            correct: "Exactly. Without a counterfactual — what would have happened without the tea — 'before and after' tells you nothing about cause and effect. Most colds run their course in about a week regardless.",
+            wrong: "The deeper issue isn't whether ginger works or doesn't. It's that 'I drank tea, then got better' isn't evidence of <em>anything</em> without a comparison. The cold would have ended either way."
+          }
+        },
+        {
+          question: "A magazine publishes a list of '10 Habits of Highly Successful CEOs.' What's the survivorship bias problem with this?",
+          options: [
+            "We only study CEOs who succeeded — failed CEOs may have had identical habits but aren't on any list.",
+            "CEOs probably exaggerate or misremember their actual habits when being interviewed for these articles.",
+            "Personal habits don't actually matter very much for determining success in the business world.",
+            "Ten habits aren't really enough data points to make the conclusions truly meaningful or useful."
+          ],
+          correct: 0,
+          feedback: {
+            correct: "Spot on. To know if these habits actually <em>cause</em> success, you'd need to compare them to the habits of people who tried and failed. We never see that data.",
+            wrong: "The trap is selecting only on the outcome (success). If failed CEOs share the same habits, then the habits aren't what made the difference. Without studying both groups, we can't tell."
+          }
+        }
+      ]
+    }
+  },
+
+  {
+    title: "The <em>Numbers</em> Trap",
+    readTime: "7 min read",
+    body: `
+      <p class="lead">You don't need to be good at math to think clearly with numbers. You need to know which questions to ask. This chapter covers the four statistical traps that catch almost everyone, almost every time.</p>
+
+      <h3>Trap #1: Anchoring</h3>
+      <p>The first number you hear becomes a mental reference point — and every other number gets judged against it, even when the first number is meaningless.</p>
+      <p>"Was RM 599, now RM 249!" The 599 is the anchor. Suddenly 249 feels like a deal, even if you'd normally never spend more than 150. Real estate agents do this. Car dealers do this. Salary negotiations do this. Whoever names the first number controls the conversation.</p>
+
+      <div class="callout">
+        <div class="callout-label">The fix</div>
+        <p>Before any negotiation or major purchase, decide your number <em>before</em> you see theirs. Write it down. Then when their anchor lands, you can compare to your own pre-committed number, not to their inflated starting point.</p>
+      </div>
+
+      <h3>Trap #2: Correlation is not causation</h3>
+      <p>Two things happening together — or one after the other — doesn't mean one caused the other.</p>
+      <p>Ice cream sales rise in summer. Drowning deaths also rise in summer. Did ice cream cause the drownings? Of course not. They're both caused by a third thing: hot weather. This is called a "confounding variable" and it lurks behind countless wrong conclusions.</p>
+      <p>The classic version: <em>"I took vitamin C and my cold went away."</em> The cold would have gone away anyway. Time passing isn't proof of causation.</p>
+
+      <h3>Trap #3: Sample size matters more than you think</h3>
+      <p>"I tried 3 restaurants in Bangkok and they were all bad. Bangkok food is overrated." Three restaurants out of tens of thousands. The conclusion is not just unfair — it's mathematically meaningless.</p>
+      <p>A small sample can show almost any pattern by pure chance. Flip a coin 4 times and getting 4 heads in a row is unremarkable. Flip it 4,000 times and getting 4,000 heads would be a miracle. The bigger the sample, the more reliable the conclusion. Tiny samples tell you almost nothing — but they often <em>feel</em> like enough.</p>
+
+      <h3>Trap #4: Base rates (the most counterintuitive of all)</h3>
+      <p>Try this. A test for a rare disease is <strong>99% accurate</strong>. The disease affects <strong>1 in 10,000 people</strong>. You take the test. It comes back positive. What's the chance you actually have the disease?</p>
+      <p>Most people guess 99%. The actual answer is closer to <strong>1%</strong>.</p>
+
+      <div class="demo-box">
+        <div class="demo-question">Why? Try the math yourself: out of 10,000 people, how many would test positive?</div>
+        <div class="demo-input">
+          <button class="btn" onclick="revealBaseRate()" style="padding: 10px 20px;">Reveal the math</button>
+        </div>
+        <div id="base-rate-result" class="hidden"></div>
+      </div>
+
+      <p>The lesson: <strong>"99% accurate"</strong> is meaningless without knowing how rare the underlying event is. When something is rare, even a highly accurate test produces mostly false positives. This applies to medical tests, security screenings, drug tests, and a hundred other places where dramatic-sounding accuracy numbers fool people every day.</p>
+
+      <div class="real-world">
+        <div class="real-world-label">Real World</div>
+        <h4>The "I'm in the top 1%" problem</h4>
+        <p>If a dating app says "you matched with someone in the top 1% of compatibility," that sounds amazing — but if 10 million people use the app, the "top 1%" is still 100,000 people. Big-sounding percentages can hide huge underlying populations. The number that matters is always: <em>1% of what?</em></p>
+      </div>
+
+      <div class="try-this">
+        <div class="try-this-label">Try This At Home</div>
+        <h4>The Three Questions Drill</h4>
+        <p>Next time you see a statistic in the news ("50% increase in X!", "9 out of 10 doctors recommend Y!"), ask three questions before believing it: <strong>1)</strong> 50% of what — and how big is the base? <strong>2)</strong> What's the comparison group? <strong>3)</strong> How was the sample selected? Most claims fall apart on question 1.</p>
+      </div>
+    `,
+    miniCheck: {
+      questions: [
+        {
+          question: "A politician boasts: 'Crime in our city dropped 50% under my leadership.' What's the most important question to ask?",
+          options: [
+            "How long has he actually been in office for this drop in crime to be attributed to him?",
+            "Which specific types of crime dropped, and were any other categories of crime rising at the same time?",
+            "Did crime in nearby cities also drop by similar amounts? If so, it's not really about his leadership.",
+            "Is this drop in crime statistically significant or could it just be normal random year-to-year variation?"
+          ],
+          correct: 2,
+          feedback: {
+            correct: "Right. Without a comparison group, you can't tell if his policies caused the drop or if it was a wider trend that would have happened anyway. Correlation isn't causation.",
+            wrong: "The cleanest test is comparing to similar places that <em>didn't</em> have his policies. If crime dropped everywhere, his policies aren't the explanation — even if his city's drop is real."
+          }
+        },
+        {
+          question: "A new drug claims to be '95% effective' at preventing a disease. To know if this is impressive, what do you need to know?",
+          options: [
+            "How long this particular drug has been on the market and approved for general public use.",
+            "How common the disease is to begin with — and how effective the existing alternative treatments are.",
+            "What the drug's known side effects are and how often patients tend to experience them.",
+            "How much the drug costs to produce, and what the average patient would have to pay to get it."
+          ],
+          correct: 1,
+          feedback: {
+            correct: "Exactly. '95% effective' is meaningless on its own. If the disease only affects 1 in a million people anyway, or if the existing drug is 96% effective, the new drug isn't impressive at all.",
+            wrong: "Effectiveness percentages need context. You need to know the base rate (how often the thing happens normally) and the comparison (what the alternatives offer). Otherwise the number is just a number."
+          }
+        }
+      ]
+    }
+  },
+
+  {
+    title: "The <em>Social</em> Trap",
+    readTime: "5 min read",
+    body: `
+      <p class="lead">Humans are social creatures. We evolved in small groups where fitting in was literally a survival strategy — being cast out of the tribe meant death. That instinct is still wired into us, and it quietly distorts our thinking in ways we rarely notice.</p>
+
+      <h3>The bandwagon effect: popularity feels like proof</h3>
+      <p>If many people believe something or do something, our brain treats that as evidence the thing must be correct or worthwhile. It's not. Popularity tells you about marketing reach, social momentum, or fear-of-missing-out — not about whether something is actually true or good.</p>
+      <p>The clearest tests of this come from financial bubbles. In 2021, certain meme stocks and cryptocurrencies rose to wild valuations because <em>everyone was buying them</em>. The "everyone is buying" was the only argument. When the wave broke, latecomers lost everything. Popularity was never evidence of value — it was just popularity.</p>
+
+      <div class="callout">
+        <div class="callout-label">The question to ask</div>
+        <p><em>"Why exactly is this a good idea?"</em> If the strongest answer is "because everyone else is doing it," that's not a reason — it's the bandwagon talking.</p>
+      </div>
+
+      <h3>Authority: famous ≠ right</h3>
+      <p>We're wired to defer to people who seem powerful, credentialed, or famous. This is usually fine — your doctor probably knows more than you about medicine. But it goes wrong when we stretch a person's authority beyond their actual expertise.</p>
+      <p>A famous CEO writes a viral post about politics. A celebrity endorses a wellness trend. A successful athlete shares dietary advice. Their fame in <em>one</em> domain gets borrowed to lend weight to claims in completely unrelated domains. Confidence and fame are not evidence.</p>
+
+      <h3>Groupthink: the cost of disagreeing is invisible</h3>
+      <p>In any group meeting, if a senior person or a confident voice states an opinion early, the group tends to converge on it — fast. Most people who privately disagree won't speak up. Not because they're cowards, but because the social cost of disagreeing in front of a group is much higher than the cost of staying quiet.</p>
+      <p>The result: groups often reach unanimous-looking decisions that <em>nobody privately agreed with</em>. Everyone assumed everyone else agreed, so they kept quiet too.</p>
+
+      <div class="real-world">
+        <div class="real-world-label">Real World</div>
+        <h4>The Bay of Pigs disaster (1961)</h4>
+        <p>President Kennedy's team unanimously approved a CIA plan to invade Cuba. It was a catastrophic failure — and afterward, multiple advisors admitted they had serious private doubts but assumed everyone else thought the plan was sound. Nobody wanted to be the one who broke the consensus. The "unanimous" agreement was an illusion. Kennedy later restructured how decisions were made specifically to prevent this kind of false consensus.</p>
+      </div>
+
+      <h3>Recency bias: the latest thing feels like the truest thing</h3>
+      <p>We weigh recent events much more heavily than older ones, even when the older evidence is just as relevant. A friend forgets your birthday once and suddenly you're questioning the whole friendship — forgetting that they organized your surprise party two years ago and supported you through a tough time. The recent event is loud. The older evidence is quiet. They shouldn't be.</p>
+
+      <div class="try-this">
+        <div class="try-this-label">Try This At Home</div>
+        <h4>The Silent Vote</h4>
+        <p>Next time you're in a group decision, before anyone speaks, ask everyone to write their preference on a piece of paper privately. Then reveal them all at once. You'll often find the "obvious consensus" was much weaker than it appeared once everyone heard the first vocal opinion. This single trick eliminates a huge chunk of groupthink.</p>
+      </div>
+    `,
+    miniCheck: {
+      questions: [
+        {
+          question: "Your friend says: 'I'm investing in this new crypto coin — it's already up 200% this month and everyone in our group chat is buying.' What's the cleanest pushback?",
+          options: [
+            "A 200% rise in a single month is unsustainable in any market — it's almost certainly going to crash soon.",
+            "How many people are buying tells you about hype, not value. The real question is what underlying reason it'll keep rising.",
+            "Smart investing means diversifying across multiple coins or assets, not putting your money into one risky thing.",
+            "Cryptocurrency in general is too volatile and unpredictable to invest serious money in at any time, really."
+          ],
+          correct: 1,
+          feedback: {
+            correct: "Exactly. The fact that it's popular and rising is exactly the pattern that bubbles produce. It's not evidence of value — it's evidence of momentum. The underlying question (why is this worth anything?) gets skipped.",
+            wrong: "The deeper issue isn't crypto vs other investments — it's that 'lots of people are buying' was treated as a reason. Bandwagon thinking and rising prices reinforce each other. By the time 'everyone' is buying, latecomers usually pay the cost."
+          }
+        },
+        {
+          question: "In a meeting, a senior leader says 'I think we should go with Option A' and three people quickly agree. What's the smart concern to raise?",
+          options: [
+            "Quick agreement after a senior voice often means deferring, not converging. Have everyone write their preference privately first.",
+            "We should consider Options B and C as well to make sure we're not missing a better choice that nobody has mentioned.",
+            "We probably need more data and analysis before deciding on something this important for the team.",
+            "Three votes really isn't enough to base a major team decision on — let's get more people to weigh in first."
+          ],
+          correct: 0,
+          feedback: {
+            correct: "Right. The mechanism (early authority anchoring + social cost of disagreement) is the actual problem. Silent independent input first is the proven fix.",
+            wrong: "The issue isn't that there are too few votes or too little data — it's that the votes you <em>do</em> have are likely not independent. Once one senior voice spoke, the rest stopped being independent opinions."
+          }
+        }
+      ]
+    }
+  },
+
+  {
+    title: "Tools You Can <em>Actually</em> Use",
+    readTime: "6 min read",
+    body: `
+      <p class="lead">Knowing the names of biases doesn't make you a critical thinker. Practicing specific habits does. These five tools are short, simple, and more effective than any theory you can read. Pick two and use them this week.</p>
+
+      <h3>1. The Pre-Mortem</h3>
+      <p>Before making any significant decision, imagine it's six months later and the decision has <em>failed catastrophically</em>. Now ask yourself (or your team): "What went wrong?"</p>
+      <p>This single exercise counters overconfidence, groupthink, and confirmation bias all at once. By assuming failure as the starting point, you give yourself permission to surface concerns that would otherwise feel like negativity. Used by Amazon, NASA, and many high-stakes military planners. Takes 15 minutes.</p>
+
+      <h3>2. "What would change my mind?"</h3>
+      <p>Before you debate or defend a position, ask yourself: <em>"What evidence would convince me I'm wrong?"</em></p>
+      <p>If your honest answer is "nothing," you're not reasoning — you're rationalizing. Genuine beliefs come with conditions for revision. Religious certainty can be fine in religion; it's a disaster in everyday decisions about money, health, relationships, and politics.</p>
+
+      <div class="callout">
+        <div class="callout-label">Personal challenge</div>
+        <p>Pick three strong opinions you hold right now. For each one, write down what evidence would change your mind. If you can't come up with anything for one of them, that's the one to investigate first.</p>
+      </div>
+
+      <h3>3. The Steel-Man</h3>
+      <p>Before criticizing any idea, articulate the <em>strongest possible</em> version of it — even stronger than the original proponent would. Only then are you allowed to argue against it.</p>
+      <p>This is the opposite of the "straw man" — attacking a weak version of someone's argument that's easier to knock down. Steel-manning forces you to genuinely understand a position before rejecting it. Most disagreements dissolve when both sides actually understand each other; the rest become much more productive.</p>
+
+      <h3>4. The Decision Journal</h3>
+      <p>Before any meaningful decision, take 5 minutes to write down: (1) what you're deciding, (2) what you predict will happen, (3) your confidence level (high/medium/low), and (4) your reasoning. Then date it and forget about it.</p>
+      <p>Three months later, go back and review. You'll discover something uncomfortable: you're not as good at predicting outcomes as you thought. This is called <em>calibration</em>, and it's one of the few proven ways to actually become a better thinker over time. Most people are systematically overconfident; only people who track their predictions ever find out.</p>
+
+      <h3>5. The 10/10/10 Rule</h3>
+      <p>For any emotional decision, ask: How will I feel about this in <strong>10 minutes? 10 months? 10 years?</strong></p>
+      <p>The 10-minute lens captures System 1 (immediate emotion). The 10-month lens captures medium-term consequences. The 10-year lens captures what really matters in the long run. When all three answers point to the same decision, you're probably right. When they point in different directions, that's the conversation worth having with yourself.</p>
+
+      <div class="real-world">
+        <div class="real-world-label">Real World</div>
+        <h4>How Jeff Bezos uses pre-mortems</h4>
+        <p>At Amazon, before launching a new product, the team writes a hypothetical press release announcing the product's failure six months after launch — including imagined customer complaints and root causes. Only after this "future obituary" exists does the team get permission to actually start building. Many projects die at this stage, which is exactly the point. The cheap death of bad ideas before they consume real resources is the goal.</p>
+      </div>
+
+      <div class="try-this">
+        <div class="try-this-label">Try This At Home — Right Now</div>
+        <h4>Apply It to a Real Decision</h4>
+        <p>Think of one decision you're currently weighing — anything from "should I take this job offer" to "should I confront my friend about something." Pick <em>one</em> tool from this chapter and apply it in the next 10 minutes. Don't read about it. Don't plan to use it later. Use it now. That's the whole difference between knowing about critical thinking and actually doing it.</p>
+      </div>
+
+      <h3>The bigger picture</h3>
+      <p>Critical thinking isn't a personality trait. It's not something you have or don't have. It's a set of habits, practiced over time, that make you slightly more accurate than the version of you who didn't practice them. Slightly more accurate, applied across thousands of small decisions over years, becomes a very different life.</p>
+      <p>You've now finished the chapters. Take the quiz when you're ready — and notice what your brain does when it picks an answer too quickly.</p>
+    `,
+    miniCheck: {
+      questions: [
+        {
+          question: "Why is the pre-mortem (imagining a decision has already failed) so effective?",
+          options: [
+            "It gives a clever way for individuals and teams to avoid making any difficult or risky decisions at all.",
+            "It always reveals the single right answer hidden somewhere within the original problem being considered.",
+            "Framing failure as already happening gives people permission to voice concerns they'd otherwise hide.",
+            "It dramatically speeds up overall decision-making by cutting down on lengthy back-and-forth discussion time."
+          ],
+          correct: 2,
+          feedback: {
+            correct: "Exactly. The genius of the pre-mortem is psychological — it removes the social cost of being 'the negative one' because you're all imagining failure together.",
+            wrong: "Pre-mortems aren't about avoiding decisions or being faster. They work by changing the <em>social dynamic</em>: by assuming failure happened, people feel safe surfacing concerns they'd normally suppress."
+          }
+        },
+        {
+          question: "Why does keeping a decision journal make you a better thinker over time?",
+          options: [
+            "It helps you remember important decisions you'd otherwise probably forget about within a few weeks or months.",
+            "Recording predictions reveals how often your intuition was wrong, forcing recalibration with real evidence.",
+            "It gives you a clean and organized way to share your decisions and reasoning with other people.",
+            "It speeds up the entire decision-making process by getting your thoughts down on paper much more quickly."
+          ],
+          correct: 1,
+          feedback: {
+            correct: "Right. Without writing predictions down beforehand, your brain quietly rewrites history to make you seem like you knew all along (hindsight bias). The journal makes that impossible.",
+            wrong: "The point isn't memory or speed — it's <em>calibration</em>. By recording predictions before the outcome, you create a real scorecard of how often your gut is right. Most people discover they were far more confident than they should have been."
+          }
+        }
+      ]
+    }
+  }
+];
+
+// ================== QUIZ QUESTIONS ==================
+const QUESTIONS = [
+  {
+    scenario: "You're shopping online for a winter jacket. The site shows: <strong>\"Was RM 599 — Now RM 249! 58% OFF, today only.\"</strong> You weren't planning to spend more than RM 150, but suddenly RM 249 feels like a bargain. What's the sharpest way to think about this?",
+    bias: "Anchoring",
+    biasDef: "Our judgment of a number gets pulled toward the first number we see — even when that first number is arbitrary, inflated, or completely irrelevant to actual value.",
+    options: [
+      { text: "Ignore the 'was' price. Ask: is this jacket worth RM 249 to me, regardless of what the tag claims?", score: 2, reason: "Strips away the anchor and evaluates the item on its own merits. The 'original' price is often inflated or fictional — your real budget and need haven't changed." },
+      { text: "Compare the RM 249 price to similar jackets at other stores before you decide whether to buy it.", score: 1, reason: "Comparison shopping is good, but you're still letting the discount frame the decision. Even if RM 249 is the best price available, it might still be more than you should spend." },
+      { text: "RM 350 in savings is significant. At more than half off, it's a strong deal — buy it before it ends.", score: 0, reason: "Pure anchoring + manufactured urgency. The 'savings' is imaginary money you never had. The real question — do I need this, can I afford it — got skipped." }
+    ]
+  },
+  {
+    scenario: "After watching a news report about a shark attack, you cancel your beach trip. <strong>\"It's just not worth the risk,\"</strong> you tell your family. What's the flaw in your reasoning?",
+    bias: "Availability Heuristic",
+    biasDef: "We judge how likely something is by how easily examples come to mind. Vivid, recent, or emotional events feel far more probable than they actually are.",
+    options: [
+      { text: "Shark attacks are extremely rare. The news made it feel common because the story was vivid, not because the risk is high.", score: 2, reason: "Correctly identifies that mental availability ≠ statistical probability. Dramatic events get reported precisely because they're rare; that reporting then makes them feel common." },
+      { text: "If it happened once recently, it could happen again. Better safe than sorry — reschedule the trip.", score: 0, reason: "Lets one vivid event override base rates entirely. By this logic you'd cancel every activity after seeing any news report — life would shrink to nothing." },
+      { text: "One attack doesn't mean another. But it's still reasonable to be cautious for a few weeks just in case.", score: 1, reason: "Acknowledges the rarity but still lets the news event drive behavior. The actual probability didn't change just because you saw a story." }
+    ]
+  },
+  {
+    scenario: "You're convinced a certain political party is corrupt. Every morning you scroll through social media and find more articles confirming exactly that. <strong>\"See? I keep being proven right,\"</strong> you tell a friend. What might you be missing?",
+    bias: "Confirmation Bias",
+    biasDef: "We unconsciously seek out, notice, and remember information that confirms what we already believe, while filtering out or dismissing information that challenges it.",
+    options: [
+      { text: "It's worth reading the other side too sometimes, just to make sure you're not in a bubble of your own making.", score: 1, reason: "Right instinct, but understated. The issue isn't just 'might be missing perspectives' — it's that your sense of certainty itself is manufactured. 'Sometimes' isn't enough to counter a daily reinforcement loop." },
+      { text: "If the evidence keeps stacking up day after day, that's exactly how you know your view is correct.", score: 0, reason: "Treats a self-reinforcing feedback loop as independent confirmation. The volume of agreeing evidence tells you nothing if you've never genuinely sought disagreeing evidence." },
+      { text: "The algorithm shows you what you already engage with. Confirming evidence is being curated; opposing views are filtered out.", score: 2, reason: "Catches both the personal bias and the algorithmic amplifier. The feeling of 'being proven right' is the predictable output of a system designed to feed your existing beliefs." }
+    ]
+  },
+  {
+    scenario: "You're 90 minutes into a 2-hour movie and you're hating it. Your partner whispers: <strong>\"We've already sat through this much, we might as well finish.\"</strong> What's the cleanest counter-argument?",
+    bias: "Sunk Cost Fallacy",
+    biasDef: "We let past, unrecoverable investments (time, money, effort) dictate future decisions — even when continuing makes us worse off.",
+    options: [
+      { text: "Walking out now would waste the entire evening. We've come this far — better to just finish what we started.", score: 0, reason: "Pure sunk cost. The evening is already 'spent' either way — staying just adds 30 more wasted minutes to the loss." },
+      { text: "The 90 minutes are gone either way. The real question is: do I want the next 30 minutes to be miserable or fun?", score: 2, reason: "Textbook sunk cost reasoning — past time is unrecoverable, so it shouldn't influence what you do next. The decision is purely about the next 30 minutes." },
+      { text: "Maybe the ending will redeem it. Let's give it 15 more minutes and bail if it really doesn't get any better.", score: 1, reason: "A reasonable compromise, but it's still partly driven by sunk cost ('we've come this far'). If you didn't already have 90 minutes invested, you wouldn't agree to start watching this movie now." }
+    ]
+  },
+  {
+    scenario: "Your uncle smoked a pack a day for 60 years and lived to 87. At every family gathering he says: <strong>\"All this fuss about smoking is overblown — look at me.\"</strong> What's wrong with his reasoning?",
+    bias: "Survivorship Bias",
+    biasDef: "We draw conclusions only from the people or things that 'survived' an event, while ignoring all those who didn't make it — distorting what the data actually shows.",
+    options: [
+      { text: "He's living proof that the dangers are exaggerated. Some people clearly handle smoking just fine over a lifetime.", score: 0, reason: "Falls completely into the trap. One survivor doesn't disprove a statistical risk any more than one lottery winner proves lotteries are a good investment." },
+      { text: "Genetics matter too. Some people just have stronger constitutions, and he may have been lucky in that way.", score: 1, reason: "True, but it concedes the framing that his survival is meaningful evidence. Even with strong genetics, you can't conclude anything about smoking risk from one person who didn't die from it." },
+      { text: "He survived so he gets to argue. The smokers who died at 55 aren't around to share their side of the story.", score: 2, reason: "Names the bias precisely. Survivors are the ones who get to tell their story; the ones who didn't survive are invisible. Sample of 'people still alive to talk' is hopelessly biased." }
+    ]
+  },
+  {
+    scenario: "A pregnancy test is advertised as <strong>\"99% accurate.\"</strong> Your friend takes one and it's positive. She's distraught — she wasn't planning to be pregnant and the test was randomly bought as part of a yearly check. What's the most useful thing to point out?",
+    bias: "Base Rate Neglect",
+    biasDef: "We focus on accuracy rates and ignore how rare or common the underlying event actually is — leading to wildly wrong probability estimates, especially when the event is rare.",
+    options: [
+      { text: "99% accuracy is very high. She should accept the result and start planning her next steps accordingly.", score: 0, reason: "Classic base rate neglect — confuses 'test accuracy' with 'probability the result is true.' These are very different numbers when the underlying event is rare or unexpected." },
+      { text: "No test is 100% reliable. She should take another test tomorrow before reacting too strongly to this one.", score: 1, reason: "Right action, but the reasoning is shallow. It doesn't explain why a single positive on a '99% accurate' test isn't as conclusive as it sounds." },
+      { text: "When pregnancy is unlikely to begin with, even a 99%-accurate test produces meaningful false positives. Retest first.", score: 2, reason: "Correctly applies base-rate thinking. When the underlying probability is low, even a highly accurate test produces a meaningful share of false positives. Always retest before reacting." }
+    ]
+  },
+  {
+    scenario: "Your child had a bad cough. You started giving them honey-and-lemon every night. After 5 days, the cough is gone. You proudly post: <strong>\"Honey and lemon cured it — skip the medicine!\"</strong> What's the issue?",
+    bias: "Post Hoc Fallacy ('After this, therefore because of this')",
+    biasDef: "Just because B happened after A doesn't mean A caused B. Most coughs, colds, and minor illnesses resolve on their own — whatever you did just before is easy to mistake for the cure.",
+    options: [
+      { text: "Most coughs go away on their own in a week. Without the same cough untreated as a comparison, you can't claim it was the cure.", score: 2, reason: "Names the missing piece: a counterfactual. You'd need to know what would have happened without the honey to claim it caused the recovery. Time passing isn't proof of causation." },
+      { text: "Honey does have some soothing properties, so it probably helped at least a bit — but you can't say it 'cured' anything fully.", score: 1, reason: "Correctly hedges the claim, but doesn't quite name why the original reasoning fails. The real issue isn't whether honey is soothing — it's that 'before/after' alone proves nothing." },
+      { text: "Five days of treatment, full recovery — that's exactly how you know it worked. The results speak for themselves.", score: 0, reason: "Pure post hoc reasoning. By this logic, every superstition would be 'proven' the moment something good happened after the ritual." }
+    ]
+  },
+  {
+    scenario: "A friend tells you: <strong>\"I'm investing in this cryptocurrency — everyone in our group chat is buying it, and three of my coworkers said it's about to take off.\"</strong> What's the strongest pushback?",
+    bias: "Bandwagon Effect",
+    biasDef: "We assume something must be true, valuable, or smart simply because lots of people believe it or are doing it. Popularity isn't evidence.",
+    options: [
+      { text: "If multiple people in your circle are confident, there's probably something to it. Just don't invest more than you can afford to lose.", score: 0, reason: "Embraces the bandwagon outright. The fact that your social circle agrees is exactly the kind of signal scams and bubbles rely on." },
+      { text: "How many people are buying tells you about hype, not value. What's the actual underlying reason it should go up?", score: 2, reason: "Cleanly separates social proof from real evidence. Popularity is a signal of marketing reach or fear-of-missing-out, not of value. The right question is always 'why,' never 'who else.'" },
+      { text: "Group chats and coworkers aren't financial experts. You should at least consult an actual financial advisor before investing.", score: 1, reason: "Practical advice, but it just swaps one authority (the group) for another (the advisor). The deeper issue — that 'lots of people are doing it' isn't evidence — gets glossed over." }
+    ]
+  },
+  {
+    scenario: "Your usually reliable friend forgot your birthday this year. You spend the next week thinking: <strong>\"Honestly, she's been a pretty bad friend lately.\"</strong> You also forget that she organized your surprise party two years ago and supported you through a tough breakup. What's happening?",
+    bias: "Recency Bias",
+    biasDef: "We give disproportionate weight to recent events and let them overshadow a much longer track record of evidence pointing the other way.",
+    options: [
+      { text: "One miss is outweighing years of consistent care. Look at the full pattern — she's a good friend who slipped up once.", score: 2, reason: "Correctly puts the recent event in context with the long-term track record. A single data point shouldn't override years of consistent evidence." },
+      { text: "Forgetting a birthday is real disappointment. Talk to her about it instead of letting it fester into a bigger judgment.", score: 1, reason: "Good practical advice, but it doesn't quite name the reasoning error. The issue isn't just 'communicate' — it's that your overall judgment of her has been hijacked by one recent event." },
+      { text: "Recent behavior matters more than older behavior — people change. Trust your current read on the friendship.", score: 0, reason: "Rationalizes the bias as wisdom. 'Recent matters more' is exactly the trap — one missed birthday doesn't erase years of consistent friendship." }
+    ]
+  },
+  {
+    scenario: "After a celebrity couple announces their divorce, your group chat lights up: <strong>\"I always knew they wouldn't last,\"</strong> someone says. <strong>\"You could see it in their last red carpet appearance.\"</strong> But six months ago, the same person called them <strong>\"couple goals.\"</strong> What's going on?",
+    bias: "Hindsight Bias ('I knew it all along')",
+    biasDef: "Once we know how something turned out, we rewrite our memory to make the outcome feel obvious and predictable — even when we genuinely had no idea at the time.",
+    options: [
+      { text: "Some people are just good at reading body language and picking up subtle cues that most others tend to miss completely.", score: 0, reason: "Treats the post-hoc rationalization as genuine insight. If they could really 'read the cues,' they wouldn't have called the couple 'couple goals' six months ago." },
+      { text: "Knowing the outcome makes it feel obvious. If it were really predictable, they'd have said so six months ago — but didn't.", score: 2, reason: "Catches the bias precisely. Hindsight bias quietly edits memory: signals that meant nothing at the time suddenly become 'obvious' once we know the outcome." },
+      { text: "Maybe small signs only seem important now. They're not necessarily lying, just remembering things rather selectively in hindsight.", score: 1, reason: "Correctly identifies selective memory, but stops short of naming the deeper problem: this kind of 'I knew it' reasoning makes us overconfident about predicting future events too." }
+    ]
+  }
+];
+
+const TIERS = [
+  { min: 18, name: "Sharp Thinker", desc: "You consistently separate evidence from emotion, spot reasoning traps, and ask the questions others skip. The chapters clearly stuck — now the real work is using these habits when no one's watching." },
+  { min: 13, name: "Solid Foundation", desc: "You catch most reasoning errors and resist obvious traps. With a bit more practice — especially around statistical thinking and group dynamics — you'll be operating at an expert level. Try the Decision Journal exercise from Chapter 5 this week." },
+  { min: 8,  name: "Developing Awareness", desc: "You're starting to spot the patterns, but some traps are still slipping past. Critical thinking is a learned skill, not a fixed trait. Re-read the chapters that map to your weakest answers — and try the quiz again in a few days." },
+  { min: 0,  name: "Ripe for Growth", desc: "Most people start exactly here — these traps are designed by evolution to feel right. The fact that you took this course means you're already ahead. Read through the review carefully — every wrong answer is a free lesson." }
+];
+
+// ================== STATE ==================
+let completedChapters = []; // array of indices
+let currentChapter = -1;
+let chapterAnswers = {}; // { chapterIdx: [correct, correct, ...] }
+
+// ================== HOME SCREEN RENDERING ==================
+function renderHome() {
+  const container = document.getElementById('chapter-list-container');
+  container.innerHTML = CHAPTERS.map((ch, i) => {
+    const isComplete = completedChapters.includes(i);
+    const isAvailable = i === 0 || completedChapters.includes(i - 1);
+    const isLocked = !isAvailable && !isComplete;
+    const cls = isComplete ? 'complete' : (isLocked ? 'locked' : '');
+    const status = isComplete ? '<span class="status-complete">✓ Complete</span>'
+                 : isLocked ? '<span class="status-locked">🔒 Locked</span>'
+                 : '<span class="status-available">→ Start</span>';
+    const onclick = isLocked ? '' : `onclick="openChapter(${i})"`;
+    const titlePlain = ch.title.replace(/<[^>]*>/g, '');
+    return `
+      <div class="chapter-card ${cls}" ${onclick}>
+        <div class="chapter-num">0${i+1}</div>
+        <div class="chapter-info">
+          <div class="chapter-title">${titlePlain}</div>
+          <div class="chapter-meta">${ch.readTime} · ${ch.miniCheck.questions.length} check questions</div>
+        </div>
+        <div class="chapter-status">${status}</div>
+      </div>
+    `;
+  }).join('');
+
+  // Update progress
+  const pct = (completedChapters.length / CHAPTERS.length) * 100;
+  document.getElementById('overall-bar').style.width = pct + '%';
+  document.getElementById('completed-count').textContent = completedChapters.length;
+
+  // Quiz lock state
+  const quizCard = document.getElementById('quiz-card');
+  const quizStatus = document.getElementById('quiz-status');
+  const quizTitle = quizCard.querySelector('.chapter-title');
+  const quizMeta = quizCard.querySelector('.chapter-meta');
+  if (completedChapters.length === CHAPTERS.length) {
+    quizCard.classList.remove('locked');
+    if (hasQuizInProgress()) {
+      const answered = userAnswers.filter(a => a !== undefined && a !== null).length;
+      quizTitle.textContent = 'Final Quiz: Resume in Progress';
+      quizMeta.textContent = `${answered} of ${QUESTIONS.length} answered · Click to continue`;
+      quizStatus.className = 'chapter-status status-available';
+      quizStatus.innerHTML = '↻ Resume';
+    } else {
+      quizTitle.textContent = 'Final Quiz: 10 Scenarios';
+      quizMeta.textContent = '~15 min · All chapters complete';
+      quizStatus.className = 'chapter-status status-available';
+      quizStatus.innerHTML = '→ Start Quiz';
+    }
+  } else {
+    quizCard.classList.add('locked');
+    quizTitle.textContent = 'Final Quiz: 10 Scenarios';
+    quizMeta.textContent = '~15 min · Unlocks when all chapters are complete';
+    quizStatus.className = 'chapter-status status-locked';
+    quizStatus.innerHTML = `🔒 ${CHAPTERS.length - completedChapters.length} chapters left`;
+  }
+
+  // Toolkit lock state (unlocks alongside the quiz, but for a different reason)
+  const toolkitCard = document.getElementById('toolkit-card');
+  const toolkitStatus = document.getElementById('toolkit-status');
+  if (completedChapters.length === CHAPTERS.length) {
+    toolkitCard.classList.remove('locked');
+    toolkitStatus.className = 'chapter-status';
+    toolkitStatus.style.color = 'var(--green)';
+    toolkitStatus.innerHTML = '→ Open';
+  } else {
+    toolkitCard.classList.add('locked');
+    toolkitStatus.className = 'chapter-status status-locked';
+    toolkitStatus.style.color = '';
+    toolkitStatus.innerHTML = '🔒 Locked';
+  }
+}
+
+function openChapter(idx) {
+  currentChapter = idx;
+  const ch = CHAPTERS[idx];
+  document.getElementById('home-screen').classList.add('hidden');
+  document.getElementById('chapter-screen').classList.remove('hidden');
+  document.getElementById('ch-num').textContent = `Chapter ${String(idx+1).padStart(2, '0')}`;
+  document.getElementById('ch-title').innerHTML = ch.title;
+  document.getElementById('ch-meta').textContent = `${ch.readTime} · Chapter ${idx+1} of ${CHAPTERS.length}`;
+  document.getElementById('chapter-body').innerHTML = ch.body;
+  renderMiniCheck(idx);
+  document.getElementById('complete-section').classList.add('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderMiniCheck(chIdx) {
+  const ch = CHAPTERS[chIdx];
+  const block = document.getElementById('mini-check-block');
+  block.innerHTML = `
+    <div class="mini-check-label">Check Your Understanding</div>
+    <h3>Quick Check</h3>
+    <div class="subhead">Answer ${ch.miniCheck.questions.length === 1 ? 'this question' : 'both questions'} correctly to mark this chapter complete.</div>
+    ${ch.miniCheck.questions.map((q, qi) => `
+      <div class="mc-question" data-qidx="${qi}">
+        <div class="mc-q-text">${q.question}</div>
+        <div class="mc-options">
+          ${q.options.map((opt, oi) => `
+            <button class="mc-option" onclick="answerMiniCheck(${chIdx}, ${qi}, ${oi})">${opt}</button>
+          `).join('')}
+        </div>
+        <div class="mc-feedback hidden" id="feedback-${qi}"></div>
+      </div>
+    `).join('')}
+  `;
+  chapterAnswers[chIdx] = new Array(ch.miniCheck.questions.length).fill(null);
+}
+
+function answerMiniCheck(chIdx, qIdx, optIdx) {
+  const q = CHAPTERS[chIdx].miniCheck.questions[qIdx];
+  const isCorrect = optIdx === q.correct;
+  chapterAnswers[chIdx][qIdx] = isCorrect;
+  saveState();
+
+  const qDiv = document.querySelector(`.mc-question[data-qidx="${qIdx}"]`);
+  const options = qDiv.querySelectorAll('.mc-option');
+  options.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.correct) btn.classList.add('correct');
+    else if (i === optIdx && !isCorrect) btn.classList.add('wrong');
+  });
+
+  const fb = document.getElementById(`feedback-${qIdx}`);
+  fb.classList.remove('hidden');
+  fb.classList.add(isCorrect ? 'correct' : 'wrong');
+  fb.innerHTML = `<strong>${isCorrect ? '✓ Correct.' : '✗ Not quite.'}</strong> ${isCorrect ? q.feedback.correct : q.feedback.wrong}`;
+
+  // Check if all questions answered
+  const allAnswered = chapterAnswers[chIdx].every(a => a !== null);
+  if (allAnswered) {
+    const allCorrect = chapterAnswers[chIdx].every(a => a === true);
+    showCompleteSection(chIdx, allCorrect);
+  }
+}
+
+function showCompleteSection(chIdx, allCorrect) {
+  const section = document.getElementById('complete-section');
+  const msg = document.getElementById('next-msg');
+  const btn = document.getElementById('next-chapter-btn');
+  section.classList.remove('hidden');
+
+  if (allCorrect) {
+    if (!completedChapters.includes(chIdx)) completedChapters.push(chIdx);
+    saveState();
+    msg.innerHTML = chIdx === CHAPTERS.length - 1
+      ? "All chapters complete. The final quiz is now unlocked."
+      : `Chapter ${chIdx+1} complete. Ready for the next one?`;
+    btn.textContent = chIdx === CHAPTERS.length - 1 ? 'Go to Final Quiz →' : 'Continue to Next Chapter →';
+    btn.disabled = false;
+  } else {
+    msg.innerHTML = "Some answers were off. Re-read the chapter and try the questions again — or move on if you're confident.";
+    btn.textContent = 'Try Again';
+    btn.disabled = false;
+    btn.onclick = () => { renderMiniCheck(chIdx); document.getElementById('complete-section').classList.add('hidden'); };
+    return;
+  }
+  btn.onclick = nextChapter;
+  section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function nextChapter() {
+  if (currentChapter === CHAPTERS.length - 1) {
+    // Go to quiz
+    document.getElementById('chapter-screen').classList.add('hidden');
+    startQuiz();
+  } else {
+    openChapter(currentChapter + 1);
+  }
+}
+
+function goHome() {
+  document.getElementById('chapter-screen').classList.add('hidden');
+  document.getElementById('quiz-screen').classList.add('hidden');
+  document.getElementById('results-screen').classList.add('hidden');
+  document.getElementById('review-screen').classList.add('hidden');
+  document.getElementById('toolkit-screen').classList.add('hidden');
+  document.getElementById('home-screen').classList.remove('hidden');
+  renderHome();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function tryStartQuiz() {
+  if (completedChapters.length < CHAPTERS.length) return;
+  startQuiz();
+}
+
+// Save & exit quiz mid-way (state is preserved in module variables)
+function exitQuizToHome() {
+  document.getElementById('quiz-screen').classList.add('hidden');
+  document.getElementById('home-screen').classList.remove('hidden');
+  renderHome();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Check whether a quiz is in progress (any answer recorded)
+function hasQuizInProgress() {
+  return userAnswers.length > 0 && userAnswers.some(a => a !== undefined && a !== null);
+}
+
+// ================== INTERACTIVE DEMOS ==================
+function checkBatBall() {
+  const input = document.getElementById('bat-ball-input').value.trim().replace(/[^\d.]/g, '');
+  const val = parseFloat(input);
+  const result = document.getElementById('bat-ball-result');
+  result.classList.remove('hidden', 'correct', 'wrong');
+  result.classList.add('demo-result');
+
+  if (isNaN(val)) {
+    result.innerHTML = "Enter a number to check.";
+    return;
+  }
+
+  if (Math.abs(val - 0.05) < 0.001) {
+    result.classList.add('correct');
+    result.innerHTML = "<strong>✓ Correct.</strong> The ball costs RM 0.05. The bat costs RM 1.05 (which is RM 1.00 more than the ball). Together: RM 1.10. If you got this right on the first try, you're in the minority — most people (including ~50% of Harvard, MIT, and Princeton students in studies) say RM 0.10 because their System 1 grabs the easy answer before System 2 checks it.";
+  } else if (Math.abs(val - 0.10) < 0.001) {
+    result.classList.add('wrong');
+    result.innerHTML = "<strong>✗ The classic wrong answer.</strong> If the ball were RM 0.10, the bat would be RM 1.10 (a dollar more), and together they'd be RM 1.20 — not RM 1.10. The actual answer is RM 0.05. <em>You just experienced System 1 hijacking your brain</em>. Don't feel bad — about 50% of students at top universities make the same mistake. The point isn't that you're wrong; it's that your brain confidently <em>felt</em> right.";
+  } else {
+    result.classList.add('wrong');
+    result.innerHTML = `<strong>Not quite.</strong> The answer is RM 0.05 (the ball) and RM 1.05 (the bat). Notice that the bat is exactly RM 1.00 more than the ball, and they sum to RM 1.10.`;
+  }
+}
+
+function revealBaseRate() {
+  const result = document.getElementById('base-rate-result');
+  result.classList.remove('hidden');
+  result.classList.add('demo-result');
+  result.innerHTML = `
+    <strong>Out of 10,000 people:</strong><br>
+    • 1 person actually has the disease — and the test correctly catches them. <strong>1 true positive.</strong><br>
+    • 9,999 people don't have the disease — but the test is wrong 1% of the time, so it falsely flags about 100 of them. <strong>~100 false positives.</strong><br><br>
+    Total positive results: <strong>101</strong>. Of those, only <strong>1</strong> is real.<br>
+    So if you test positive, your actual chance of having the disease is roughly <strong>1 in 101 — about 1%</strong>, not 99%.<br><br>
+    This is why doctors retest before treating. The accuracy number is real — but it tells you about the <em>test</em>, not about <em>you</em>.
+  `;
+}
+
+// ================== QUIZ FLOW ==================
+let currentQ = 0;
+let userAnswers = [];
+let pendingSelection = null;
+
+function startQuiz() {
+  document.getElementById('home-screen').classList.add('hidden');
+  document.getElementById('chapter-screen').classList.add('hidden');
+  document.getElementById('quiz-screen').classList.remove('hidden');
+
+  // If there's a quiz in progress, resume from where the user left off
+  if (hasQuizInProgress()) {
+    // Find first unanswered question
+    let resumeIdx = userAnswers.findIndex(a => a === undefined || a === null);
+    if (resumeIdx === -1) resumeIdx = userAnswers.length;
+    currentQ = resumeIdx;
+  } else {
+    currentQ = 0;
+    userAnswers = [];
+  }
+  pendingSelection = null;
+
+  if (currentQ >= QUESTIONS.length) {
+    showResults();
+  } else {
+    renderQuestion();
+  }
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[currentQ];
+  const pct = (currentQ / QUESTIONS.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = `Question ${currentQ + 1} of ${QUESTIONS.length}`;
+
+  const container = document.getElementById('question-container');
+  const letters = ['A', 'B', 'C'];
+  container.innerHTML = `
+    <div class="question-card">
+      <div class="q-num">Question ${String(currentQ + 1).padStart(2, '0')}</div>
+      <div class="scenario">${q.scenario}</div>
+      <div class="options">
+        ${q.options.map((opt, i) => `
+          <button class="option" data-idx="${i}" onclick="selectOption(${i})">
+            <span class="option-letter">${letters[i]}</span>
+            <span class="option-text">${opt.text}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div id="confidence-block" class="confidence-block hidden">
+        <div class="confidence-label">How confident are you in your answer?</div>
+        <div class="confidence-buttons">
+          <button class="conf-btn" data-conf="low" onclick="selectConfidence('low')">Low</button>
+          <button class="conf-btn" data-conf="medium" onclick="selectConfidence('medium')">Medium</button>
+          <button class="conf-btn" data-conf="high" onclick="selectConfidence('high')">High</button>
+        </div>
+      </div>
+      <div id="reveal-block"></div>
+    </div>
+  `;
+  pendingSelection = null;
+
+  // If this question was already answered (resuming after exit), show the reveal
+  if (userAnswers[currentQ]) {
+    const ans = userAnswers[currentQ];
+    document.querySelectorAll('.option').forEach(el => {
+      el.disabled = true;
+    });
+    document.querySelectorAll('.conf-btn').forEach(btn => {
+      btn.disabled = true;
+      if (btn.dataset.conf === ans.confidence) btn.classList.add('selected');
+    });
+    document.getElementById('confidence-block').classList.remove('hidden');
+    revealAnswer();
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function selectOption(idx) {
+  if (pendingSelection !== null || userAnswers[currentQ]) return;
+  pendingSelection = idx;
+  document.querySelectorAll('.option').forEach((el, i) => {
+    el.classList.toggle('selected', i === idx);
+    el.disabled = true;
+  });
+  document.getElementById('confidence-block').classList.remove('hidden');
+}
+
+function selectConfidence(level) {
+  document.querySelectorAll('.conf-btn').forEach(btn => {
+    btn.classList.toggle('selected', btn.dataset.conf === level);
+    btn.disabled = true;
+  });
+  const q = QUESTIONS[currentQ];
+  const score = q.options[pendingSelection].score;
+  userAnswers[currentQ] = { selected: pendingSelection, score: score, confidence: level };
+  pendingSelection = null;
+  saveState();
+  revealAnswer();
+}
+
+function revealAnswer() {
+  const q = QUESTIONS[currentQ];
+  const ans = userAnswers[currentQ];
+
+  document.querySelectorAll('.option').forEach((el, i) => {
+    el.classList.remove('selected');
+    el.classList.add(`scored-${q.options[i].score}`);
+    const tag = q.options[i].score === 2 ? 'Best Answer · 2 pts'
+              : q.options[i].score === 1 ? 'Partial Credit · 1 pt'
+              : 'Weakest Answer · 0 pts';
+    el.querySelector('.option-text').insertAdjacentHTML('beforeend',
+      `<div class="score-tag">${tag}</div>`);
+  });
+
+  const reveal = document.getElementById('reveal-block');
+  const yourScore = ans.score;
+  const scoreMsg = yourScore === 2 ? "You picked the strongest answer."
+                 : yourScore === 1 ? "Partial credit — you got close, but there's a sharper answer."
+                 : "This answer falls into the trap. Read carefully — the lesson is here.";
+
+  reveal.innerHTML = `
+    <div class="reveal">
+      <div class="bias-badge">The Trap: ${q.bias}</div>
+      <h3>You scored ${yourScore} out of 2</h3>
+      <p>${scoreMsg}</p>
+      <p><strong>What's going on:</strong> ${q.biasDef}</p>
+      ${q.options.map((opt, i) => `
+        <div class="reasoning-item">
+          <strong>${['A','B','C'][i]} (${opt.score} pts):</strong> ${opt.reason}
+        </div>
+      `).join('')}
+      <div class="next-btn-wrap">
+        <button class="btn btn-accent" onclick="nextQuestion()">
+          ${currentQ === QUESTIONS.length - 1 ? 'See Results →' : 'Next Question →'}
+        </button>
+      </div>
+    </div>
+  `;
+  reveal.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function nextQuestion() {
+  currentQ++;
+  if (currentQ >= QUESTIONS.length) showResults();
+  else renderQuestion();
+}
+
+function showResults() {
+  document.getElementById('quiz-screen').classList.add('hidden');
+  document.getElementById('review-screen').classList.add('hidden');
+  document.getElementById('results-screen').classList.remove('hidden');
+
+  // Ensure main results shown, not thank-you
+  document.getElementById('results-main').classList.remove('hidden');
+  document.getElementById('results-thankyou').classList.add('hidden');
+
+  const total = userAnswers.reduce((sum, a) => sum + a.score, 0);
+  const tier = TIERS.find(t => total >= t.min);
+
+  document.getElementById('final-score').textContent = total;
+  document.getElementById('tier-name').textContent = tier.name;
+  document.getElementById('tier-desc').textContent = tier.desc;
+
+  // Auto-fill today's date
+  const today = new Date();
+  const dateStr = today.toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'long', year: 'numeric'
+  });
+  document.getElementById('completion-date').textContent = `Completed on ${dateStr}`;
+
+  // Reset the name field display state
+  const nameInput = document.getElementById('name-input');
+  // If input is empty, check if we have a saved name to restore
+  if (!nameInput.value) {
+    const saved = loadState();
+    if (saved && saved.userName) {
+      nameInput.value = saved.userName;
+    }
+  }
+  if (!nameInput.value) {
+    // Ensure input is showing
+    nameInput.style.display = '';
+    // Submit button should be disabled until name is typed
+    document.getElementById('submit-results-btn').disabled = true;
+  } else {
+    // If name is retained from prior view, re-apply the enabled state
+    updateNameDisplay();
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateNameDisplay() {
+  const input = document.getElementById('name-input');
+  const submitBtn = document.getElementById('submit-results-btn');
+  const value = input.value.trim();
+  // Style change: when name typed, show it more prominently as a "stamp"
+  if (value) {
+    input.style.fontWeight = '700';
+    input.style.color = 'var(--accent)';
+    submitBtn.disabled = false;
+  } else {
+    input.style.fontWeight = '400';
+    input.style.color = 'var(--ink)';
+    submitBtn.disabled = true;
+  }
+  debouncedSave();
+}
+
+function submitResults() {
+  const name = document.getElementById('name-input').value.trim();
+  if (!name) return;
+
+  const total = userAnswers.reduce((sum, a) => sum + a.score, 0);
+  const tier = TIERS.find(t => total >= t.min);
+
+  // Date in "24 April 2026" format
+  const today = new Date();
+  const dateStr = today.toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'long', year: 'numeric'
+  });
+
+  // Confidence analytics
+  const highConfAnswers = userAnswers.filter(a => a.confidence === 'high');
+  const highConfTotal = highConfAnswers.length;
+  const highConfWrong = highConfAnswers.filter(a => a.score < 2).length;
+
+  // Build Google Form pre-filled URL
+  const baseUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSc2jGd3zV56aTl4eGjUxtlpLDUv1zuIuWH-Xl0S7cnFJRWaYQ/viewform';
+  const params = new URLSearchParams({
+    'usp': 'pp_url',
+    'entry.1814327679': name,
+    'entry.1316403653': `${total} / 20 (${tier.name})`,
+    'entry.439811107': dateStr,
+    'entry.166508581': String(highConfWrong),
+    'entry.1980515086': String(highConfTotal)
+  });
+  const submitUrl = `${baseUrl}?${params.toString()}`;
+
+  // Open form in new tab
+  window.open(submitUrl, '_blank', 'noopener,noreferrer');
+
+  // Show thank you screen
+  document.getElementById('results-main').classList.add('hidden');
+  const ty = document.getElementById('results-thankyou');
+  ty.classList.remove('hidden');
+  document.getElementById('ty-name').textContent = name;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showReview() {
+  document.getElementById('results-screen').classList.add('hidden');
+  document.getElementById('review-screen').classList.remove('hidden');
+
+  const container = document.getElementById('review-container');
+  const letters = ['A', 'B', 'C'];
+  container.innerHTML = QUESTIONS.map((q, i) => {
+    const ans = userAnswers[i];
+    return `
+      <div class="review-card">
+        <div class="review-header">
+          <div>
+            <div class="review-q-num">Question ${i + 1}</div>
+            <div class="bias-badge" style="margin-top: 8px; margin-bottom: 0;">${q.bias}</div>
+          </div>
+          <div class="review-score s${ans.score}">${ans.score}/2</div>
+        </div>
+        <div class="review-scenario">${q.scenario}</div>
+        <div class="review-meta"><strong>Your answer (${letters[ans.selected]}):</strong> ${q.options[ans.selected].text}</div>
+        <div class="review-meta"><strong>Your confidence:</strong> ${ans.confidence.charAt(0).toUpperCase() + ans.confidence.slice(1)}</div>
+        <div class="review-meta" style="margin-top: 12px;"><strong>Why:</strong> ${q.options[ans.selected].reason}</div>
+        ${ans.score < 2 ? `<div class="review-meta" style="margin-top: 8px;"><strong>Best answer (${letters[q.options.findIndex(o => o.score === 2)]}):</strong> ${q.options.find(o => o.score === 2).text}</div>` : ''}
+      </div>
+    `;
+  }).join('');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function backToResults() {
+  document.getElementById('review-screen').classList.add('hidden');
+  document.getElementById('results-screen').classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restartQuiz() {
+  currentQ = 0;
+  userAnswers = [];
+  pendingSelection = null;
+  document.getElementById('results-screen').classList.add('hidden');
+  document.getElementById('review-screen').classList.add('hidden');
+  startQuiz();
+}
+
+// ================== TOOLKIT ==================
+function tryOpenToolkit() {
+  if (completedChapters.length < CHAPTERS.length) return;
+  openToolkit();
+}
+
+function openToolkit() {
+  document.getElementById('home-screen').classList.add('hidden');
+  document.getElementById('results-screen').classList.add('hidden');
+  document.getElementById('toolkit-screen').classList.remove('hidden');
+
+  // Restore saved toolkit entries (one-time on open)
+  const saved = loadState();
+  if (saved) {
+    restoreJournalFields(saved.journal);
+    restorePremortemFields(saved.premortem);
+  }
+
+  // Wire up auto-save listeners (idempotent — won't double-attach)
+  if (!window._toolkitListenersAttached) {
+    document.querySelectorAll('#panel-journal textarea, #panel-premortem textarea').forEach(el => {
+      el.addEventListener('input', debouncedSave);
+    });
+    document.querySelectorAll('#panel-journal input, #panel-premortem input').forEach(el => {
+      el.addEventListener('change', debouncedSave);
+    });
+    window._toolkitListenersAttached = true;
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goToToolkit() {
+  document.getElementById('results-screen').classList.add('hidden');
+  openToolkit();
+}
+
+function switchToolkitTab(tab) {
+  document.querySelectorAll('.toolkit-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.tab === tab);
+  });
+  document.getElementById('panel-journal').classList.toggle('hidden', tab !== 'journal');
+  document.getElementById('panel-premortem').classList.toggle('hidden', tab !== 'premortem');
+}
+
+function copyJournal() {
+  const decision = document.getElementById('dj-decision').value.trim();
+  const context = document.getElementById('dj-context').value.trim();
+  const prediction = document.getElementById('dj-prediction').value.trim();
+  const confEl = document.querySelector('input[name="dj-conf"]:checked');
+  const confidence = confEl ? confEl.value : '(not selected)';
+  const reasoning = document.getElementById('dj-reasoning').value.trim();
+  const counter = document.getElementById('dj-counter').value.trim();
+  const biases = Array.from(document.querySelectorAll('input[name="dj-biases"]:checked')).map(c => '- ' + c.value).join('\n');
+
+  const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  const output = `DECISION JOURNAL — ${today}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. THE DECISION
+${decision || '(empty)'}
+
+2. MY CONTEXT RIGHT NOW
+${context || '(empty)'}
+
+3. MY PREDICTION
+${prediction || '(empty)'}
+
+4. CONFIDENCE LEVEL
+${confidence}
+
+5. MY REASONING
+${reasoning || '(empty)'}
+
+6. WHAT WOULD CHANGE MY MIND
+${counter || '(empty)'}
+
+7. POTENTIAL BIASES AT PLAY
+${biases || '(none selected)'}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REMINDER: Review this entry in 3 months.
+Were you right? How confident should you
+have been in hindsight?`;
+
+  navigator.clipboard.writeText(output).then(() => {
+    const status = document.getElementById('journal-copied');
+    status.classList.remove('hidden');
+    setTimeout(() => status.classList.add('hidden'), 4000);
+  }).catch(() => {
+    // Fallback: show the text in a prompt for manual copy
+    window.prompt('Copy this to your notes:', output);
+  });
+}
+
+function resetJournal() {
+  if (!confirm('Clear all journal fields?')) return;
+  document.getElementById('dj-decision').value = '';
+  document.getElementById('dj-context').value = '';
+  document.getElementById('dj-prediction').value = '';
+  document.getElementById('dj-reasoning').value = '';
+  document.getElementById('dj-counter').value = '';
+  document.querySelectorAll('input[name="dj-conf"]').forEach(r => r.checked = false);
+  document.querySelectorAll('input[name="dj-biases"]').forEach(c => c.checked = false);
+  saveState();
+}
+
+function copyPremortem() {
+  const plan = document.getElementById('pm-plan').value.trim();
+  const r1 = document.getElementById('pm-reason1').value.trim();
+  const r2 = document.getElementById('pm-reason2').value.trim();
+  const r3 = document.getElementById('pm-reason3').value.trim();
+  const r4 = document.getElementById('pm-reason4').value.trim();
+  const r5 = document.getElementById('pm-reason5').value.trim();
+  const likely = document.getElementById('pm-likely').value.trim();
+  const mitigation = document.getElementById('pm-mitigation').value.trim();
+  const warning = document.getElementById('pm-warning').value.trim();
+  const proceedEl = document.querySelector('input[name="pm-proceed"]:checked');
+  const proceed = proceedEl ? proceedEl.value : '(not selected)';
+
+  const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  const output = `PRE-MORTEM WORKSHEET — ${today}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. THE PLAN / DECISION
+${plan || '(empty)'}
+
+2. WHY IT FAILED (6 months from now)
+   #1 ${r1 || '(empty)'}
+   #2 ${r2 || '(empty)'}
+   #3 ${r3 || '(empty)'}
+   #4 ${r4 || '(empty)'}
+   #5 ${r5 || '(empty)'}
+
+3. MOST LIKELY FAILURE MODE
+${likely || '(empty)'}
+
+4. MITIGATION PLAN
+${mitigation || '(empty)'}
+
+5. EARLIEST WARNING SIGN
+${warning || '(empty)'}
+
+6. DECISION AFTER PRE-MORTEM
+${proceed}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NEXT STEP: Put the warning sign on your
+calendar. If you see it, act fast.`;
+
+  navigator.clipboard.writeText(output).then(() => {
+    const status = document.getElementById('premortem-copied');
+    status.classList.remove('hidden');
+    setTimeout(() => status.classList.add('hidden'), 4000);
+  }).catch(() => {
+    window.prompt('Copy this to your notes:', output);
+  });
+}
+
+function resetPremortem() {
+  if (!confirm('Clear all pre-mortem fields?')) return;
+  ['pm-plan','pm-reason1','pm-reason2','pm-reason3','pm-reason4','pm-reason5','pm-likely','pm-mitigation','pm-warning'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.querySelectorAll('input[name="pm-proceed"]').forEach(r => r.checked = false);
+  saveState();
+}
+
+// Initialize: restore saved state if any, then render home
+(function initialize() {
+  const saved = loadState();
+  if (saved) {
+    if (Array.isArray(saved.completedChapters)) completedChapters = saved.completedChapters;
+    if (Array.isArray(saved.userAnswers)) userAnswers = saved.userAnswers;
+    if (saved.chapterAnswers && typeof saved.chapterAnswers === 'object') chapterAnswers = saved.chapterAnswers;
+    if (saved.userName) {
+      // Restore name input once results screen is opened
+      const tryRestoreName = () => {
+        const input = document.getElementById('name-input');
+        if (input && !input.value) input.value = saved.userName;
+      };
+      tryRestoreName();
+    }
+  }
+  renderHome();
+})();
+</script>
+</body>
+</html>
